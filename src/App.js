@@ -1,9 +1,14 @@
+import {Routes,Route} from "react-router-dom";
+import TestPage from "./pages/TestPage";
+import HomePage from "./pages/HomePage";
 
 function App() {
   return (
-    <div>
-      테스트 입니다
-    </div>
+          <Routes>
+              <Route path="/" element={<HomePage/>}/>
+              <Route path={"/test"} element={<TestPage/>}/>
+          </Routes>
+
   );
 }
 
