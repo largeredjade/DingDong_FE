@@ -7,18 +7,21 @@ const size = {
 
 const theme = {
     colors :{
-        mainColor: "#6ABD8C",
-        mainColorLight: "#CCDFB0",
-        backgroundColor: "#F6F9F0",
-        darkGray: "#595959",
-        lightGray: "#939292",
-        superLightGray: "#F1F2F5",
+        mainColor: "#CFE9DC",
+        mainColorDark: "#A0D6BB",
+        white: "#ffffff",
+        darkGray: "#616161",
+        lightGray: "#A9A9A9",
     },
     backgroundColor: {
-        lightGray: "#939292",
-        superLightGray: "#F1F2F5",
+        mainColor: "#CFE9DC",
+        mainColorDark: "#A0D6BB",
+        white: "#ffffff",
+        darkGray: "#616161",
+        lightGray: "#A9A9A9",
     },
-
+    mobile: `393px`,
+    tablet: "640px",
 };
 
 export default theme;
