@@ -2,6 +2,7 @@ import {Routes,Route} from "react-router-dom";
 import TestPage from "./pages/TestPage";
 import HomePage from "./pages/HomePage";
 import styled from "styled-components";
+import MainPage from "./pages/Mainpage";
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
               <Routes>
                   <Route path="/" element={<HomePage/>}/>
                   <Route path={"/test"} element={<TestPage/>}/>
+                  <Route path={"/main"} element={<MainPage/>}/>
               </Routes>
           </Container>
       </Wrapper>

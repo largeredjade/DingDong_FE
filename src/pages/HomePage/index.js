@@ -7,6 +7,7 @@ function HomePage() {
                 홈페이지 입니다.
             </h1>
             <GoToTestBtn/>
+
         </>
 
     );
