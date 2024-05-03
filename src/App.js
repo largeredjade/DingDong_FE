@@ -3,6 +3,8 @@ import TestPage from "./pages/TestPage";
 import HomePage from "./pages/HomePage";
 import styled from "styled-components";
 import MainPage from "./pages/Mainpage";
+import LoginPage from "./pages/LoginPage";
+import JoinPage from "./pages/JoinPage";
 
 function App() {
   return (
@@ -12,6 +14,9 @@ function App() {
                   <Route path="/" element={<HomePage/>}/>
                   <Route path={"/test"} element={<TestPage/>}/>
                   <Route path={"/main"} element={<MainPage/>}/>
+                  <Route path={"/login"} element={<LoginPage/>}/>
+                  <Route path={"/join"} element={<JoinPage/>}/>
+
               </Routes>
           </Container>
       </Wrapper>
