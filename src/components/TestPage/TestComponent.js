@@ -1,6 +1,10 @@
 import {Link} from "react-router-dom";
 import styled from "styled-components";
-import theme from "../../styles/theme";
+import LoginPopup from "../Popup/LoginPopup";
+import JoinPage from "../../pages/JoinPage";
+import JoinClubPopup from "../Popup/JoinClubPopup";
+import CameraPopup from "../Popup/CameraPopup";
+import QrPopup from "../Popup/QrPopup";
 
 function TestComponent() {
     return (
@@ -11,6 +15,10 @@ function TestComponent() {
                     홈페이지로 이동하기
                 </GotoBtn>
             </Link>
+            {/*<LoginPopup/>*/}
+            {/*<JoinClubPopup/>*/}
+            <CameraPopup/>
+            {/*<QrPopup/>*/}
         </>
     );
 }
