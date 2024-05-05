@@ -52,6 +52,7 @@ const WriteInput = styled.input`
     border-radius: 20px;
     border: 2px solid #B7B7B7;
     color: ${({theme})=> theme.colors.darkGray};
+    outline: none;
     &:hover{
         border: 2px solid ${({theme})=> theme.colors.mainColorDark};
     }
