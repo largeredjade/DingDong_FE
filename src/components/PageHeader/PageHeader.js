@@ -5,7 +5,6 @@ import {HeaderLogo} from "../../components/Icons/logos";
 function PageHeader() {
     const location = useLocation();
     const currentPath = location.pathname;
-
     return (
         <>
             <Wrap>
@@ -15,9 +14,9 @@ function PageHeader() {
                     </Link>
                 </LogoBox>
                 <ItemBox>
-                    <Link to={'#동아리구경주소'}><p style={{fontWeight: currentPath === '#동아리구경주소' ? 'bold' : 'normal'}}>동아리 구경</p></Link>
-                    <Link to={'#동아리등록주소'}><p style={{fontWeight: currentPath === '#동아리등록주소' ? 'bold' : 'normal'}}>동아리 등록</p></Link>
-                    <Link to={'#마이페이지주소'}><p style={{fontWeight: currentPath === '#마이페이지주소' ? 'bold' : 'normal'}}>마이페이지</p></Link>
+                    <StyledLink to={'#동아리구경주소'} selected={currentPath === '#동아리구경주소'}>동아리 구경</StyledLink>
+                    <StyledLink to={'#동아리등록주소'} selected={currentPath === '#동아리등록주소'}>동아리 등록</StyledLink>
+                    <StyledLink to={'/mypage'} selected={currentPath === '/mypage'}>마이페이지</StyledLink>
                 </ItemBox>
             </Wrap>
             
@@ -29,35 +28,40 @@ function PageHeader() {
 export default PageHeader;
 
 
+
 const Wrap = styled.div`
     display: flex;
     flex-direction: column;
     align-items:center;
     height:180px;
+    position: fixed;
+    top: 0px;
+    width:100%;
+    z-index: 999;
     border-radius: 0px 0px 20px 20px;
     background: ${({theme}) => theme.backgroundColor.mainColor};
-    @media (max-width: ${({theme})=> theme.mobile}) {
-        border-radius: 0 0 20px 20px;
+    @media (min-width: 600px) {
+        width: 600px;
+        left: relative;
     }
-`
+`;
 
 
 const ItemBox =styled.div`
     display: flex;
     width: 100%;
-    margin-top: 20px;
-    p {  
-        color: ${({ theme }) => theme.colors.darkGray};
-        font-size: 18px;
-        margin-left: 25px;
-        padding: 15px 0;
-        @media (min-width: ${({ theme }) => theme.mobile}) {
-            font-size: 16px;
-            margin-left: 85px;
-    }
-`
+    margin: auto;
+    justify-content: space-evenly;
+    color: ${({ theme }) => theme.colors.darkGray};
+`;
 
 const LogoBox = styled.div`
     display: flex;
+    justify-content: center;
     margin-top: 40px;
-`
+`;
+
+const StyledLink = styled(Link)`
+    font-size: 16px;
+    font-weight: ${({ selected }) => selected ? 'bold' : 'normal'};
+`;
