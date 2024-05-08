@@ -5,6 +5,7 @@ import styled from "styled-components";
 import MainPage from "./pages/Mainpage";
 import LoginPage from "./pages/LoginPage";
 import JoinPage from "./pages/JoinPage";
+import MyPage from "./pages/MyPage";
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
                   <Route path={"/main"} element={<MainPage/>}/>
                   <Route path={"/login"} element={<LoginPage/>}/>
                   <Route path={"/join"} element={<JoinPage/>}/>
-
+                  <Route path={"/mypage"} element={<MyPage/>}/>
               </Routes>
           </Container>
       </Wrapper>
