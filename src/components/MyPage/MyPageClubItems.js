@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 function MyPageClubItems() {
@@ -8,9 +9,9 @@ function MyPageClubItems() {
                     <RegisterInfo>내가 가입한 동아리</RegisterInfo>
                 </ItemBox>
                 <ClubBtnBox>
-                    <ClubBtn>멋쟁이사자처럼</ClubBtn>
-                    <ClubBtn>축구</ClubBtn>
-                    <ClubBtn>배구</ClubBtn>
+                    <ClubLink to={'/mypage/joinclub'}>멋쟁이사자처럼</ClubLink>
+                    <ClubLink to={'/mypage/joinclub'}>축구</ClubLink>
+                    <ClubLink to={'/mypage/joinclub'}>배구</ClubLink>
                 </ClubBtnBox>
                 <LogoutBtnBox>
                     <LogoutBtn>로그아웃</LogoutBtn>
@@ -42,12 +43,13 @@ const ClubBtnBox = styled.div`
     flex-direction: column;
     justify-content: center;
 `;
-const ClubBtn = styled.button`
+const ClubLink = styled(Link)`
     font-size: 18px;
     margin-top:20px;
     font-weight: bold;
     width: 320px;
     height: 56px;
+    padding-top:16px;
     border-radius: 20px;
     color: ${({theme})=> theme.colors.darkGray};
     border: 2px solid ${({theme})=> theme.colors.lightGray};

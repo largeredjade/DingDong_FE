@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-function MyPage() {
+function MyPageItems() {
     return (
         <>
             <Wrapper>
@@ -18,7 +18,7 @@ function MyPage() {
     );
 }
 
-export default MyPage;
+export default MyPageItems;
 
 const Wrapper = styled.div`
     display: grid;
