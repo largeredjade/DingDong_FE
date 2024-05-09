@@ -62,6 +62,6 @@ const LogoBox = styled.div`
 `;
 
 const StyledLink = styled(Link)`
-    font-size: 16px;
+    font-size: 18px;
     font-weight: ${({ selected }) => selected ? 'bold' : 'normal'};
 `;
