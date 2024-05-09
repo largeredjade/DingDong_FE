@@ -1,23 +1,24 @@
 import PageHeader from "../../components/PageHeader/PageHeader";
-import MyPageItmes from "../../components/MyPage/MyPageItems";
-import MyPageClubItems from "../../components/MyPage/MyPageClubItems";
+import JoinClubItems from"../../components/MyPageJoinClub/JoinClubItems";
+import JoinClubCalendar from"../../components/MyPageJoinClub/JoinClubCalendar";
 import styled from "styled-components";
 
-function MyPage() {
+function MyPageJoinClub() {
     return (
-        <>  <Wrap>
+        <>  
+            <Wrap>
                <PageHeader/>
                 <ItemBox>
-                    <MyPageItmes/>
+                    <JoinClubItems/>
                 </ItemBox>
-                <MyPageClubItems/>
+                <JoinClubCalendar/>
             </Wrap>
         </>
 
     );
 }
 
-export default MyPage;
+export default MyPageJoinClub;
 
 const Wrap = styled.div`
 `;
