@@ -16,7 +16,7 @@ function PageHeader() {
                 <ItemBox>
                     <StyledLink to={'/main'} selected={currentPath === '/main'}>동아리 구경</StyledLink>
                     <StyledLink to={'/registration'} selected={currentPath === '/registration'}>동아리 등록</StyledLink>
-                    <StyledLink to={'/mypage'} selected={currentPath === '/mypage'}>마이페이지</StyledLink>
+                    <StyledLink to={'/mypage'} selected={currentPath === '/mypage' || currentPath === '/mypage/joinclub'}>마이페이지</StyledLink>
                 </ItemBox>
             </Wrap>
             
