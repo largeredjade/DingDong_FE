@@ -3,11 +3,11 @@ import styled from "styled-components";
 import { CameraIcon } from '../Icons/logos';
 
 function RegistrationItems() {
-    const [isRecruiting, setIsRecruiting] = useState(false);
+    // const [isRecruiting, setIsRecruiting] = useState(false);
 
-    const handleRecruitingChange = () => {
-        setIsRecruiting(!isRecruiting);
-    };
+    // const handleRecruitingChange = () => {
+    //     setIsRecruiting(!isRecruiting);
+    // };
 
     return (
         <>
@@ -18,33 +18,32 @@ function RegistrationItems() {
                         <FileUploadBtn><CameraIcon/></FileUploadBtn>
                     </CameraBox>
                     <ItemBox>
-                            <p>동아리 이름</p>
-                            <WriteInput placeholder={'우리 동아리 이름을 입력해 주세요'}/>                            
+                        <p>동아리 이름</p>
+                        <WriteInput placeholder={'우리 동아리 이름을 입력해 주세요'}/>                            
                     </ItemBox>
-                                             <ItemBox>
-                            <p>동아리 가입 코드</p>
-                            <WriteInput placeholder={'숫자를 입력해 주세요.'}/>
-                        </ItemBox>
-                        <ItemBox>
-                            <p>활동 시간</p>
-                            <WriteInput placeholder={'ex) 매주 목요일 오후 7시'}/>
-                        </ItemBox>
-                        <ItemBox>
-                            <p>동아리 소개</p>
-                            <WriteClubActivity placeholder={'우리 동아리에 대해 소개해 주세요'}/>
-                        </ItemBox>
-                        <ItemBox>
-                            <p>활동 내용</p>
-                            <WriteClubActivity placeholder={'우리 동아리의 작년 활동 혹은 올해 활동에 대해 작성해 주세요.'} rows="4"/>
-                        </ItemBox>
-                        <ItemBox>
-                            <p>연락처</p>
-                            <WriteInput placeholder={'ex) 010-1234-5678'}/>
-                        </ItemBox>
-                        <ItemBox>
-                            <p>모집 여부</p>
-                        </ItemBox>
-                    {/* </InputWrap> */}
+                    <ItemBox>
+                        <p>동아리 가입 코드</p>
+                        <WriteInput placeholder={'숫자를 입력해 주세요.'}/>
+                    </ItemBox>
+                    <ItemBox>
+                        <p>활동 시간</p>
+                        <WriteInput placeholder={'ex) 매주 목요일 오후 7시'}/>
+                    </ItemBox>
+                    <ItemBox>
+                        <p>동아리 소개</p>
+                        <WriteClubActivity placeholder={'우리 동아리에 대해 소개해 주세요'}/>
+                    </ItemBox>
+                    <ItemBox>
+                        <p>활동 내용</p>
+                        <WriteClubActivity placeholder={'우리 동아리의 작년 활동 혹은 올해 활동에 대해 작성해 주세요.'} rows="4"/>
+                    </ItemBox>
+                    <ItemBox>
+                        <p>연락처</p>
+                        <WriteInput placeholder={'ex) 010-1234-5678'}/>
+                    </ItemBox>
+                    <ItemBox>
+                        <p>모집 여부</p>
+                    </ItemBox>    
                 </Box>
                 <RegstrationBtnBox>
                     <RegstrationBtn>등록하기</RegstrationBtn>
@@ -73,10 +72,6 @@ const Box = styled.div`
     border: 2px solid #CFE9DC;
     border-radius: 30px;
 `;
-
-const InputWrap = styled.div`
-    text-align: center;
-`
 
 const CameraBox = styled.div`
     text-align: center;
