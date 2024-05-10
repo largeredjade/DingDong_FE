@@ -7,6 +7,7 @@ import LoginPage from "./pages/LoginPage";
 import JoinPage from "./pages/JoinPage";
 import MyPage from "./pages/MyPage";
 import MyPageJoinClub from "./pages/MyPageJoinClub";
+import RegistrationPage from "./pages/RegistrationPage";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
                   <Route path={"/join"} element={<JoinPage/>}/>
                   <Route path={"/mypage"} element={<MyPage/>}/>
                   <Route path={"/mypage/joinclub"} element={<MyPageJoinClub/>}/>
+                  <Route path={"/registration"} element={<RegistrationPage/>}/>
               </Routes>
           </Container>
       </Wrapper>
@@ -40,14 +42,15 @@ const Wrapper = styled.div`
     background: #F5F5F5;
     
 `
-
 const Container = styled.div`
     width: 600px;
     height: 100vh;
     background: ${({theme}) => theme.backgroundColor.white};
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
     @media (max-width:${({theme}) => theme.mobile} ) {
         width: 100vw;
         height: 100vh;
     }
-    
-    `
+`
