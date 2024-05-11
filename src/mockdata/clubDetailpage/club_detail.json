@@ -1,0 +1,10 @@
+{
+  "club_id": "1",
+  "club_name": "Club A",
+  "club_time": "Every Wednesday",
+  "club_introduction": "intro",
+  "club_details": "detail",
+  "club_contact": "010-0000-0000",
+  "club_open": true,
+  "club_code": "123"
+}

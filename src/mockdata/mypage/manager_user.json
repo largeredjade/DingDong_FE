@@ -1,0 +1,21 @@
+{
+  "user_id": "1",
+  "name": "김나연",
+  "manager": true,
+  "register_clubs": [
+    {
+      "club_id": "1",
+      "name": "Club A"
+    }
+  ],
+  "joined_clubs": [
+    {
+      "club_id": "2",
+      "name": "Club B"
+    },
+    {
+      "club_id": "4",
+      "name": "Club D"
+    }
+  ]
+}

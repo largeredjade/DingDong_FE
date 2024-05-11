@@ -1,0 +1,18 @@
+{
+  "clubs": [
+    {
+      "club_id": "1",
+      "name": "Club A",
+      "description": "A description.",
+      "club_open": true,
+      "remaining_days": "D-4"
+    },
+    {
+      "club_id": "2",
+      "name": "Club B",
+      "description": "B description.",
+      "club_open": false,
+      "remaining_days": "모집마감"
+    }
+  ]
+}
