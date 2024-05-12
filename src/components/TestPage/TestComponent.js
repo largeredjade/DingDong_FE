@@ -15,6 +15,7 @@ function TestComponent() {
                     홈페이지로 이동하기
                 </GotoBtn>
             </Link>
+
             {/*<LoginPopup/>*/}
             {/*<JoinClubPopup/>*/}
             <CameraPopup/>
