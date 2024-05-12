@@ -1,8 +1,16 @@
 import {useState} from "react";
 import styled from "styled-components";
 import {Link} from "react-router-dom";
+import {useDispatch} from "react-redux";
+import {closePopup} from "../../redux/loginPopup";
 
 function LoginPopup() {
+    const dispatch = useDispatch();
+
+    const handleClosePopup = () => {
+        dispatch(closePopup());
+    };
+
 
     return (
         <>
@@ -15,7 +23,7 @@ function LoginPopup() {
                             <span>회원가입</span>
                         </Link>
                         <BtnContainer>
-                        <Btn>취소</Btn>
+                            <Btn onClick={handleClosePopup}>취소</Btn>
                             <Link to={'/login'}>
                                 <Btn>확인</Btn>
                             </Link>
