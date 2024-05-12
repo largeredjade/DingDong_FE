@@ -7,6 +7,9 @@ import {BrowserRouter} from "react-router-dom";
 import GlobalStyles from "./styles/GlobalStyles";
 import { ThemeProvider } from "styled-components";
 import theme from "./styles/theme";
+import {Provider} from "react-redux";
+import store from "./redux/store";
+import {CookiesProvider} from "react-cookie";
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -15,9 +18,14 @@ root.render(
         <BrowserRouter>
             <ThemeProvider theme={theme}>
                 <GlobalStyles/>
-                <App />
+                <CookiesProvider>
+                    <Provider store={store}>
+                        <App />
+                    </Provider>
+                </CookiesProvider>
             </ThemeProvider>
         </BrowserRouter>
+
     </>
 
 
