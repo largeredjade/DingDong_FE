@@ -9,9 +9,12 @@ function HomePage() {
             <Link to={'/main'}>
                 <DomWrap>
                     <ItemWrapper>
-                        <Logo/>
-                        <p>우리 서비스 슬로건</p>
+                        <LogoBox>
+                            <Logo/>
+                        </LogoBox>
+                        <Slogan>원하시는 동아리의 초인종을 눌러주세요!</Slogan>
                     </ItemWrapper>
+
                 </DomWrap>
             </Link>
 
@@ -36,3 +39,17 @@ const DomWrap = styled.div`
 
 const ItemWrapper = styled.div`
     `
+
+const LogoBox =styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`
+
+const Slogan = styled.div`
+    margin-top: 35px;
+    font-size: 20px;
+    font-weight: bold;
+    color: ${({theme})=> theme.colors.darkGray};
+
+`
