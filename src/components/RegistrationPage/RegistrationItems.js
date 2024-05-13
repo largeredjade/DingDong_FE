@@ -109,6 +109,7 @@ const WriteClubActivity = styled.textarea`
     padding-left: 16px;
     width: 294px;
     height: 80px;
+    resize: none;
     border-radius: 20px;
     border: 2px solid #B7B7B7;
     color: ${({theme})=> theme.colors.darkGray};

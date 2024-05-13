@@ -8,6 +8,7 @@ import JoinPage from "./pages/JoinPage";
 import MyPage from "./pages/MyPage";
 import MyPageJoinClub from "./pages/MyPageJoinClub";
 import RegistrationPage from "./pages/RegistrationPage";
+import DetailPage from "./pages/DetailPage";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
                   <Route path={"/mypage"} element={<MyPage/>}/>
                   <Route path={"/mypage/joinclub"} element={<MyPageJoinClub/>}/>
                   <Route path={"/registration"} element={<RegistrationPage/>}/>
+                  <Route path={"/main/detail"} element={<DetailPage/>}/>
               </Routes>
           </Container>
       </Wrapper>

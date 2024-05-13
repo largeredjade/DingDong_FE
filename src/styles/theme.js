@@ -12,6 +12,7 @@ const theme = {
         white: "#ffffff",
         darkGray: "#616161",
         lightGray: "#A9A9A9",
+        darkMint: "#419F70",
     },
     backgroundColor: {
         mainColor: "#CFE9DC",

@@ -1,23 +1,10 @@
+import { Link } from "react-router-dom/dist";
 import styled from "styled-components";
 
 function MainItems() {
     return (
         <>
-            <Wrapper>
-                <Box>
-                    <Date>D-7</Date>
-                    <SmallInfoBox>
-                        <ClubPhotoBox><img src=".//MainPage/Clubview.png" /></ClubPhotoBox>
-                        <ClubInfoBox>
-                            <ClubName>
-                                <p>멋쟁이 사자처럼</p>
-                            </ClubName>
-                            <ClubIntro>
-                                <p>비전공자를 위한 웹개발 동아리</p>
-                            </ClubIntro>
-                        </ClubInfoBox>
-                    </SmallInfoBox>
-                </Box>
+            <Wrapper to={"/main/detail"}>
                 <Box>
                     <Date>D-7</Date>
                     <SmallInfoBox>
@@ -39,7 +26,7 @@ function MainItems() {
 
 export default MainItems;
 
-const Wrapper = styled.div`
+const Wrapper = styled(Link)`
     
 `;
 
@@ -60,16 +47,16 @@ const Date= styled.div`
     justify-content: flex-end;    
     font-weight: bold;
     font-size: 18px;
-    color: #616161;
+    color: ${({theme})=>theme.colors.darkMint};
     margin: 20px;
 `
 
 const SmallInfoBox = styled.div`
     display: grid;
     grid-template-columns: auto auto;
-    grid-gap:15px;
+    grid-gap: 13px;
     justify-content: center;
-    margin-bottom: 20px;
+    padding: 0px 5px 20px 10px;
 `
 
 const ClubPhotoBox = styled.div`
@@ -93,10 +80,11 @@ const ClubPhotoBox = styled.div`
 
 const ClubInfoBox = styled.div`
     display: grid;
-    grid-collumn: 3;
+    grid-column: 3;
 `
 
 const ClubName = styled.div`
+    margin-top: 10px;
     p{
         font-weight: bold;
         font-size: 20px;
