@@ -8,3 +8,8 @@ export const getUserInfoFromLocalStorage = () => {
     const userInfoString = localStorage.getItem('userInfo');
     return userInfoString ? JSON.parse(userInfoString) : null;
 };
+
+export const removeUserInfo = ()=>{
+    localStorage.removeItem('userInfo')
+
+}

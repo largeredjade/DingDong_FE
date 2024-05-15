@@ -1,21 +1,29 @@
 import styled from "styled-components";
+import {useState} from "react";
+import QrPopup from "../Popup/QrPopup";
+
 import {Link, useLocation} from "react-router-dom";
 function MyPageItems() {
+    const [isShowQr, setIsShowQr] =useState(false)
+
+    const handleQrPopup = ()=>{
+        setIsShowQr(!isShowQr)
+    }
     const location = useLocation();
     const currentPath = location.pathname;
     return (
         <>
+            {isShowQr && <QrPopup onChange={handleQrPopup} qr_code={"https://www.notion.so/hufsglobal/HUFS-12-e23a2e85170c4dca85a689949b424309"}/>}
             <Wrapper>
                 <ItemBox>
                     <InfoClub>김나연의 동아리 <span>멋쟁이사자처럼</span></InfoClub>
                 </ItemBox>
                 <BtnItemBox>
-                    <BtnQR><p>출석 QR<br/>생성하기</p></BtnQR>
+                    <BtnQR onClick={handleQrPopup}><p>출석 QR<br/>생성하기</p></BtnQR>
                     <BtnModify><Link to={'/registration/modify'} selected={currentPath === '/registration/modify'}>
                             <p>동아리 정보</p><p>수정하기</p>
                         </Link>
                     </BtnModify>
-                        
                 </BtnItemBox>
             </Wrapper>
             

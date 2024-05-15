@@ -1,7 +1,14 @@
-import { Link } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import styled from "styled-components";
+import {removeUserInfo} from "../../auth/localStorage";
 
 function MyPageClubItems() {
+    const navigate = useNavigate()
+    const handleLogout = ()=>{
+        removeUserInfo()
+        navigate('/main')
+
+    }
     return (
         <>
             <Wrapper>
@@ -14,7 +21,7 @@ function MyPageClubItems() {
                     <ClubLink to={'/mypage/joinclub'}>배구</ClubLink>
                 </ClubBtnBox>
                 <LogoutBtnBox>
-                    <LogoutBtn>로그아웃</LogoutBtn>
+                    <LogoutBtn onClick={handleLogout}>로그아웃</LogoutBtn>
                 </LogoutBtnBox>
             </Wrapper>
             
