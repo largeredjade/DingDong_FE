@@ -7,6 +7,9 @@ import CameraPopup from "../Popup/CameraPopup";
 import QrPopup from "../Popup/QrPopup";
 import {useDispatch, useSelector} from "react-redux";
 import {selectIsPopupShown, showPopup} from "../../redux/loginPopup";
+import TestUpload from "./TestUpload";
+
+
 
 function TestComponent() {
     const dispatch = useDispatch()
@@ -28,8 +31,9 @@ function TestComponent() {
             {isPopupShown && <LoginPopup/>}
             {/*<LoginPopup/>*/}
             {/*<JoinClubPopup/>*/}
-            {/*<CameraPopup/>*/}
+            <CameraPopup/>
             {/*<QrPopup/>*/}
+            <TestUpload/>
         </>
     );
 }
