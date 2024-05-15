@@ -12,7 +12,15 @@ function MainPage() {
   };
 
   const data = allclubs.clubs;
-
+  const getFilteredData = () => {
+    if (currentButton === 2) {
+      return data.filter(club => club.club_open);
+    } else if (currentButton === 3) {
+      return data.filter(club => !club.club_open);
+    }
+    return data;
+  };
+  const filteredData = getFilteredData();
   return (
     <>
       <Wrap>
@@ -30,7 +38,7 @@ function MainPage() {
             </NowBtn>
           </NowBtnBox>
           <ItemBox>
-            <MainItems data={data} />
+                <MainItems data={filteredData} />
           </ItemBox>
         </MaincontentBox>
       </Wrap>
