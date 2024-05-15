@@ -1,9 +1,9 @@
-import {Link, useNavigate} from "react-router-dom";
+import {Link,  useNavigate} from "react-router-dom";
 import styled from "styled-components";
 import {useState} from "react";
-import axios from "axios";
-import {setCookie} from "../../auth/cookie";
 import {saveUserInfoToLocalStorage} from "../../auth/localStorage";
+import {useDispatch} from "react-redux";
+import {closePopup} from "../../redux/loginPopup";
 
 
 function LoginItems() {
@@ -12,8 +12,10 @@ function LoginItems() {
         student_id:'',
         password: '',
     })
-
+    const dispatch = useDispatch();
     const navigate = useNavigate()
+
+
     const handleChange = (e) => {
         const {name, value} = e.target;
         setValues((prevValues)=>({
@@ -35,11 +37,23 @@ function LoginItems() {
 
     function handleSubmit (e){
         e.preventDefault();
-        saveUserInfoToLocalStorage(values)
-        console.log('values',values);
-        navigate('/main')
-        //로컬스토리지에 유저 정보 저장
+        if (values.student_id == '' || values.password ==''){
+            alert('모든 필드를 채워주세요!')
+        }else{
+            try{
+                saveUserInfoToLocalStorage(values)
+                console.log('values',values);
+                dispatch(closePopup());
+                navigate('/main')
+            }catch (error){
+                alert('로그인에 실패했습니다. 다시 시도해 주세요.')
+            }
+        }
     }
+
+
+
+
 
     return (
         <>
