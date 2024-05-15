@@ -1,13 +1,13 @@
 import styled from "styled-components";
-// import { useState } from "react";
-// import JoinClubPopup from "../Popup/JoinClubPopup";
+import { useState } from "react";
+import LoginPopup from "../Popup/LoginPopup";
 
 function DetailItems() {
-  // const [showPopup, setShowPopup] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
 
-  // const togglePopup = () => {
-  //   setShowPopup(!showPopup);
-  // };
+  const togglePopup = () => {
+    setShowPopup(!showPopup);
+  };
 
   return (
     <>
@@ -62,10 +62,9 @@ function DetailItems() {
           </LargeInfoBox>
         </Box>
         <JoinBtnBox>
-          <JoinBtn>가입하기</JoinBtn>
-          {/* <JoinBtn onClick={togglePopup}>가입하기</JoinBtn>
-          <JoinClubPopup isOpen={showPopup} onClose={togglePopup} /> 
-          이거 팝업 연결한건데 에러가 있는거 같아서 주석화 해뒀습니다*/}
+          <JoinBtn onClick={togglePopup}>가입하기</JoinBtn>
+          {showPopup && <LoginPopup/>}
+          {/* <JoinClubPopup isOpen={showPopup} onClose={togglePopup} />  */}
         </JoinBtnBox>
       </Wrapper>
     </>
