@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import styled from "styled-components";
 import { CameraIcon } from '../Icons/logos';
+import RecruitmentItems from "../../components/RegistrationPage/RecruitmentItems";
 
 function RegistrationItems() {
     // const [isRecruiting, setIsRecruiting] = useState(false);
@@ -41,9 +42,7 @@ function RegistrationItems() {
                         <p>연락처</p>
                         <WriteInput placeholder={'ex) 010-1234-5678'}/>
                     </ItemBox>
-                    <ItemBox>
-                        <p>모집 여부</p>
-                    </ItemBox>    
+                    <RecruitmentItems/>
                 </Box>
                 <RegstrationBtnBox>
                     <RegstrationBtn>등록하기</RegstrationBtn>
@@ -65,7 +64,6 @@ const Box = styled.div`
     grid-row:  8;
     border-radius: 20px;
     width: 350px;
-    height: 1046px;
     top: 216px;
     justify-content: center;
     background: #FFFFFF;

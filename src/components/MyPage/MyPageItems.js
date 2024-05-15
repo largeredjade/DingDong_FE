@@ -1,6 +1,8 @@
 import styled from "styled-components";
-
+import {Link, useLocation} from "react-router-dom";
 function MyPageItems() {
+    const location = useLocation();
+    const currentPath = location.pathname;
     return (
         <>
             <Wrapper>
@@ -9,7 +11,11 @@ function MyPageItems() {
                 </ItemBox>
                 <BtnItemBox>
                     <BtnQR><p>출석 QR<br/>생성하기</p></BtnQR>
-                    <BtnModify><p>동아리 정보</p><p>수정하기</p></BtnModify>
+                    <BtnModify><Link to={'/registration/modify'} selected={currentPath === '/registration/modify'}>
+                            <p>동아리 정보</p><p>수정하기</p>
+                        </Link>
+                    </BtnModify>
+                        
                 </BtnItemBox>
             </Wrapper>
             
