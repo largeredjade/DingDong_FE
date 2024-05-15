@@ -15,7 +15,7 @@ function PageHeader() {
                 </LogoBox>
                 <ItemBox>
                     <StyledLink to={'/main'} selected={currentPath === '/main'}>동아리 구경</StyledLink>
-                    <StyledLink to={'/registration'} selected={currentPath === '/registration'}>동아리 등록</StyledLink>
+                    <StyledLink to={'/registration'} selected={currentPath === '/registration' || currentPath === '/registration/modify'}>동아리 등록</StyledLink>
                     <StyledLink to={'/mypage'} selected={currentPath === '/mypage' || currentPath === '/mypage/joinclub'}>마이페이지</StyledLink>
                 </ItemBox>
             </Wrap>
@@ -37,7 +37,7 @@ const Wrap = styled.div`
     position: fixed;
     top: 0px;
     width:100%;
-    z-index: 999;
+    z-index: 2;
     border-radius: 0px 0px 20px 20px;
     background: ${({theme}) => theme.backgroundColor.mainColor};
     @media (min-width: 600px) {
