@@ -1,55 +1,66 @@
 import PageHeader from "../../components/PageHeader/PageHeader";
 import MainItems from "../../components/MainPage/MainItems";
 import styled from "styled-components";
+import React, { useState } from "react";
+import allclubs from "../../mockdata/mainpage/allclubs.json";
 
 function MainPage() {
-    return (
-        <> 
-            <Wrap>
-               <PageHeader/>
-               <MaincontentBox>
-                <NowBtnBox>
-                    <NowBtn>현재 모집중</NowBtn>
-                </NowBtnBox>
-                <ItemBox>
-                    <MainItems/>
-                </ItemBox>
-               </MaincontentBox>
-               
-            </Wrap>
-        </>
+  const [currentButton, setCurrentButton] = useState(1);
 
-    );
+  const handleToggle = () => {
+    setCurrentButton((prevButton) => (prevButton === 3 ? 1 : prevButton + 1));
+  };
+
+  const data = allclubs.clubs;
+
+  return (
+    <>
+      <Wrap>
+        <PageHeader />
+        <MaincontentBox>
+          <NowBtnBox>
+            <NowBtn onClick={handleToggle}>
+              {currentButton === 1 
+                ? "전체 보기"
+                : currentButton === 2  && data.some((item) => item.club_open)
+                ? "현재 모집중"
+                : currentButton === 3 && data.some((item) => !item.club_open)
+                ? "모집 마감"
+              : "전체 보기"}
+            </NowBtn>
+          </NowBtnBox>
+          <ItemBox>
+            <MainItems data={data} />
+          </ItemBox>
+        </MaincontentBox>
+      </Wrap>
+    </>
+  );
 }
 
 export default MainPage;
 
-const Wrap = styled.div`
-
-`;
+const Wrap = styled.div``;
 
 const MaincontentBox = styled.div`
-    display: grid;
-    grid-row: 2;
-    justify-content: center;
-    margin-top: 200px;
+  display: grid;
+  grid-row: 2;
+  justify-content: center;
+  margin-top: 200px;
 `;
 
-
 const NowBtnBox = styled.div`
-    text-align: right;
-    justify-content: flex-end;
-    margin-bottom: 20px;
+  text-align: right;
+  justify-content: flex-end;
+  margin-bottom: 20px;
 `;
 
 const NowBtn = styled.button`
-    width: 112px;
-    height: 32px;
-    background: #FFFFFF;
-    border: 1px solid #B7B7B7;
-    border-radius: 20px;
-`
-
-const ItemBox = styled.div`
-
+  width: 112px;
+  height: 32px;
+  background: #ffffff;
+  border: 1px solid #b7b7b7;
+  border-radius: 20px;
 `;
+
+const ItemBox = styled.div``;
