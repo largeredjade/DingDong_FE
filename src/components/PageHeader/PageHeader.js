@@ -1,12 +1,29 @@
 import styled from "styled-components";
 import {Link, useLocation} from "react-router-dom";
 import {HeaderLogo} from "../../components/Icons/logos";
+import {useDispatch, useSelector} from "react-redux";
+import {selectIsPopupShown, showPopup} from "../../redux/loginPopup";
+import {getUserInfoFromLocalStorage} from "../../auth/localStorage";
+import LoginPopup from "../Popup/LoginPopup";
 
 function PageHeader() {
     const location = useLocation();
     const currentPath = location.pathname;
+    const dispatch = useDispatch()
+    const isPopupShown = useSelector(selectIsPopupShown);
+
+
+    const handleLoginPopup = () => {
+        const userStatus = getUserInfoFromLocalStorage();
+        if(userStatus == null){
+            dispatch(showPopup());
+        }
+    };
+
+
     return (
         <>
+            {isPopupShown && <LoginPopup/>}
             <Wrap>
                 <LogoBox>
                     <Link to={'/main'}>
@@ -15,8 +32,12 @@ function PageHeader() {
                 </LogoBox>
                 <ItemBox>
                     <StyledLink to={'/main'} selected={currentPath === '/main'}>동아리 구경</StyledLink>
-                    <StyledLink to={'/registration'} selected={currentPath === '/registration' || currentPath === '/registration/modify'}>동아리 등록</StyledLink>
-                    <StyledLink to={'/mypage'} selected={currentPath === '/mypage' || currentPath === '/mypage/joinclub'}>마이페이지</StyledLink>
+                    <StyledLink
+                        onClick={handleLoginPopup}
+                        to={'/registration'} selected={currentPath === '/registration'}>동아리 등록</StyledLink>
+                    <StyledLink
+                        onClick={handleLoginPopup}
+                        to={'/mypage'} selected={currentPath === '/mypage' || currentPath === '/mypage/joinclub'}>마이페이지</StyledLink>
                 </ItemBox>
             </Wrap>
             
@@ -37,7 +58,7 @@ const Wrap = styled.div`
     position: fixed;
     top: 0px;
     width:100%;
-    z-index: 2;
+    z-index: 1;
     border-radius: 0px 0px 20px 20px;
     background: ${({theme}) => theme.backgroundColor.mainColor};
     @media (min-width: 600px) {

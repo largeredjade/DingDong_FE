@@ -1,14 +1,16 @@
 import {useState} from "react";
 import styled from "styled-components";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {closePopup} from "../../redux/loginPopup";
 
 function LoginPopup() {
     const dispatch = useDispatch();
+    const navigate =useNavigate();
 
     const handleClosePopup = () => {
         dispatch(closePopup());
+        navigate('/main')
     };
 
 
@@ -49,6 +51,7 @@ const Wrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 2;
 `;
 
 const PopupContent = styled.div`

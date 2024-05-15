@@ -3,16 +3,16 @@ import {QRCodeCanvas} from "qrcode.react";
 import {useState} from "react";
 
 
-function QrPopup() {
+function QrPopup({onChange, qr_code}) {
 
     return (
         <>
             <Wrapper>
                 <PopupContent>
                     <QrBox>
-                        <QRCodeCanvas size={200} value={"https://www.notion.so/hufsglobal/HUFS-12-e23a2e85170c4dca85a689949b424309"}/>
+                        <QRCodeCanvas size={200} value={qr_code}/>
                     </QrBox>
-                    <FinishedQrBtn> 출석 완료</FinishedQrBtn>
+                    <FinishedQrBtn onClick={onChange}> 출석 완료</FinishedQrBtn>
                 </PopupContent>
 
             </Wrapper>
@@ -34,6 +34,7 @@ const Wrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 2;
 `;
 
 const PopupContent = styled.div`
