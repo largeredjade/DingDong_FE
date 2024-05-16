@@ -20,7 +20,8 @@ function MyPageItems() {
                 </ItemBox>
                 <BtnItemBox>
                     <BtnQR onClick={handleQrPopup}><p>출석 QR<br/>생성하기</p></BtnQR>
-                    <BtnModify><Link to={'/registration/modify'} selected={currentPath === '/registration/modify'}>
+                    <BtnModify>
+                        <Link to={'/mypage/clubedit'} selected={currentPath === '/mypage/clubedit'}>
                             <p>동아리 정보</p><p>수정하기</p>
                         </Link>
                     </BtnModify>

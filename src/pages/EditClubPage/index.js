@@ -2,7 +2,7 @@ import PageHeader from "../../components/PageHeader/PageHeader";
 import RegistrationItems from "../../components/RegistrationPage/RegistrationItems";
 import styled from "styled-components";
 
-function ModifyRegistrationPage() {
+function EditRegistrationPage() {
     return (
         <> 
             <Wrap>
@@ -16,7 +16,7 @@ function ModifyRegistrationPage() {
     );
 }
 
-export default ModifyRegistrationPage;
+export default EditRegistrationPage;
 
 const Wrap = styled.div`
     height: 100vh;
