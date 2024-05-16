@@ -8,7 +8,7 @@ import JoinPage from "./pages/JoinPage";
 import MyPage from "./pages/MyPage";
 import MyPageJoinClub from "./pages/MyPageJoinClub";
 import RegistrationPage from "./pages/RegistrationPage";
-import ModifyRegistrationPage from "./pages/ModifyRegistrationPage";
+import EditRegistrationPage from "./pages/EditClubPage";
 import DetailPage from "./pages/DetailPage";
 
 function App() {
@@ -25,7 +25,7 @@ function App() {
                   <Route path={"/mypage/joinclub"} element={<MyPageJoinClub/>}/>
                   <Route path={"/registration"} element={<RegistrationPage/>}/>
                   <Route path={"/main/detail"} element={<DetailPage/>}/>
-                  <Route path={"registration/modify"} element={<ModifyRegistrationPage/>}/>
+                  <Route path={"/mypage/clubedit"} element={<EditRegistrationPage/>}/>
               </Routes>
           </Container>
       </Wrapper>
