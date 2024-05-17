@@ -1,19 +1,37 @@
 import styled from "styled-components";
+import {useState} from "react";
+import {Link, useLocation} from "react-router-dom";
+
+import QrPopup from "../Popup/QrPopup";
 
 function TestMyPageMockData({data}) {
+    const [isShowQr, setIsShowQr] =useState(false)
+
+    const handleQrPopup = ()=>{
+        setIsShowQr(!isShowQr)
+    }
+    const location = useLocation();
+    const currentPath = location.pathname;
     return (
-        <>
-            <Title>마이페이지에서 쓰이는 데이터 테스트</Title>
+        <>  
+            {isShowQr && <QrPopup onChange={handleQrPopup} qr_code={"https://www.notion.so/hufsglobal/HUFS-12-e23a2e85170c4dca85a689949b424309"}/>}
             {data.map((item)=>(
-                <Wrap key={item.user_id}>
-                    <p>이름: {item.name}</p>
-                    {item.register_clubs.map((i)=>(
-                        <p>내가 만든 동아리: {i.name}</p>
-                    ))}
-                    {item.joined_clubs.map((j)=>(
-                        <p>내가 가입한 동아리:{j.name}</p>
-                    ))}
-                </Wrap>
+                <Wrapper key={item.user_id}>
+                    <ItemBox>
+                        <InfoClub>{item.name}의 동아리 {item.register_clubs.map((i)=>(
+                        <span>{i.name}</span>
+                        ))}
+                        </InfoClub>
+                    </ItemBox>
+                    <BtnItemBox>
+                        <BtnQR onClick={handleQrPopup}><p>출석 QR<br/>생성하기</p></BtnQR>
+                        <BtnModify>
+                            <Link to={'/mypage/clubedit'} selected={currentPath === '/mypage/clubedit'}>
+                                <p>동아리 정보</p><p>수정하기</p>
+                            </Link>
+                        </BtnModify>
+                    </BtnItemBox>
+                </Wrapper>
             ))}
         </>
 
@@ -23,19 +41,64 @@ function TestMyPageMockData({data}) {
 export default TestMyPageMockData;
 
 
-const Wrap = styled.div`
+const Wrapper = styled.div`
+    display: grid;
+    grid-template-rows: auto auto;
+    grid-template-columns: 1fr;
+    margin-bottom: 35px;
+`;
+const ItemBox = styled.div`
+    color: ${({theme})=> theme.colors.darkGray};
+    margin-bottom: 20px;
+`;
+const InfoClub = styled.div`
     font-size: 20px;
-    padding: 10px;
-    margin: 10px;
-    border: 2px solid cadetblue;
-    border-radius: 20px;
-    p{
-        padding: 10px;
-        font-size: 15px;
-        
+    span{
+        font-weight: bold;
+        font-size: 25px;
     }
-`
-const Title  = styled.div`
-    font-size: 20px;
-    font-weight: bold;
-`
+`;
+const BtnItemBox = styled.div`
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: auto auto;
+    grid-gap:44px;
+    justify-content: center;
+    color: ${({theme})=> theme.colors.darkGray};
+    
+`;
+const BtnQR = styled.button`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    p{
+        margin: 0;
+        font-size: 18px;
+        line-height: 1.3;
+    }
+    width: 140px;
+    height: 130px;
+    border-radius: 20px;
+    border: 2px solid ${({theme})=> theme.colors.lightGray};
+    &:hover{
+        border: 2px solid ${({theme})=> theme.colors.mainColorDark};
+    }
+`;
+const BtnModify = styled.button`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    p{
+        margin: 0;
+        font-size: 18px;
+    }
+    width: 140px;
+    height: 130px;
+    border-radius: 20px;
+    border: 2px solid ${({theme})=> theme.colors.lightGray};
+    &:hover{
+        border: 2px solid ${({theme})=> theme.colors.mainColorDark};
+    }
+`;

@@ -6,6 +6,9 @@ import TestMyPageMockData from "../../components/TestPage/TestMyPageMockData";
 import TestRedux from "../../components/TestPage/TestRedux";
 import TestHandleRedux from "../../components/TestPage/TestHandleRedux";
 
+import TestMyPage from "../../components/TestPage/TestMypage";
+import TestMyPageDetail from "../../components/TestPage/TestMypageDetail";
+
 function TestPage() {
     // json.에서 불러온 데이터 새로운 변수에 저장
     const data = allclubs.clubs;
@@ -22,6 +25,8 @@ function TestPage() {
             <p>MockData TEST</p>
             <TestMockData data={data}/>
             <TestMyPageMockData data={user_data}/>
+            <TestMyPage data={user_data}/>
+            <TestMyPageDetail data={user_data}/>
             <h1>
             테스트페이지입니다.
             </h1>

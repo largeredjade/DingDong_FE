@@ -1,16 +1,18 @@
 import PageHeader from "../../components/PageHeader/PageHeader";
-import MyPageItmes from "../../components/MyPage/MyPageItems";
+import MyPageItemes from "../../components/MyPage/MyPageItems";
 import MyPageClubItems from "../../components/MyPage/MyPageClubItems";
 import styled from "styled-components";
+import manager_user from "../../mockdata/mypage/manager_user.json"
 
 function MyPage() {
+    const user_data = [manager_user];
     return (
         <>  <Wrap>
                <PageHeader/>
                 <ItemBox>
-                    <MyPageItmes/>
+                    <MyPageItemes data={user_data}/>
                 </ItemBox>
-                <MyPageClubItems/>
+                <MyPageClubItems data={user_data}/>
             </Wrap>
         </>
 
