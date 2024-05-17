@@ -1,6 +1,8 @@
+import {Link, useNavigate} from "react-router-dom";
 import styled from "styled-components";
+import {removeUserInfo} from "../../auth/localStorage";
 
-function MyPageJoinClub({data}) {
+function MyPageDetail({data}) {
     return (
         <>
             {data.map((item)=> (
@@ -14,13 +16,13 @@ function MyPageJoinClub({data}) {
                         <BtnCheckQR><p>출석 QR<br/>스캔하기</p></BtnCheckQR>
                     </BtnItemBox>
                 </Wrapper>
-            ))}    
+            ))}
         </>
 
     );
 }
 
-export default MyPageJoinClub;
+export default MyPageDetail;
 
 const Wrapper = styled.div`
     display: flex;

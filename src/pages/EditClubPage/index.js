@@ -1,5 +1,5 @@
 import PageHeader from "../../components/PageHeader/PageHeader";
-import RegistrationItems from "../../components/RegistrationPage/RegistrationItems";
+import EditRegistrationItems from "../../components/EditPage/EditRegistrationItems"
 import styled from "styled-components";
 
 function EditRegistrationPage() {
@@ -8,7 +8,7 @@ function EditRegistrationPage() {
             <Wrap>
                <PageHeader/>
                 <ItemBox>
-                    <RegistrationItems/>
+                    <EditRegistrationItems/>
                 </ItemBox>
             </Wrap>
         </>

@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import {useState} from "react";
 import QrPopup from "../Popup/QrPopup";
-
 import {Link, useLocation} from "react-router-dom";
-function MyPageItems() {
+
+function MyPageItems({data}) {
     const [isShowQr, setIsShowQr] =useState(false)
 
     const handleQrPopup = ()=>{
@@ -12,22 +12,26 @@ function MyPageItems() {
     const location = useLocation();
     const currentPath = location.pathname;
     return (
-        <>
+        <>  
             {isShowQr && <QrPopup onChange={handleQrPopup} qr_code={"https://www.notion.so/hufsglobal/HUFS-12-e23a2e85170c4dca85a689949b424309"}/>}
-            <Wrapper>
-                <ItemBox>
-                    <InfoClub>김나연의 동아리 <span>멋쟁이사자처럼</span></InfoClub>
-                </ItemBox>
-                <BtnItemBox>
-                    <BtnQR onClick={handleQrPopup}><p>출석 QR<br/>생성하기</p></BtnQR>
-                    <BtnModify>
-                        <Link to={'/mypage/clubedit'} selected={currentPath === '/mypage/clubedit'}>
-                            <p>동아리 정보</p><p>수정하기</p>
-                        </Link>
-                    </BtnModify>
-                </BtnItemBox>
-            </Wrapper>
-            
+            {data.map((item)=>(
+                <Wrapper key={item.user_id}>
+                    <ItemBox>
+                        <InfoClub>{item.name}의 동아리 {item.register_clubs.map((i)=>(
+                        <span>{i.name}</span>
+                        ))}
+                        </InfoClub>
+                    </ItemBox>
+                    <BtnItemBox>
+                        <BtnQR onClick={handleQrPopup}><p>출석 QR<br/>생성하기</p></BtnQR>
+                        <BtnModify>
+                            <Link to={'/mypage/clubedit'} selected={currentPath === '/mypage/clubedit'}>
+                                <p>동아리 정보</p><p>수정하기</p>
+                            </Link>
+                        </BtnModify>
+                    </BtnItemBox>
+                </Wrapper>
+            ))}
         </>
 
     );
