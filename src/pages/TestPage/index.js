@@ -8,6 +8,7 @@ import TestHandleRedux from "../../components/TestPage/TestHandleRedux";
 
 import TestMyPage from "../../components/TestPage/TestMypage";
 import TestMyPageDetail from "../../components/TestPage/TestMypageDetail";
+import Loading from "../../components/LoadingSpinner/Loading";
 
 function TestPage() {
     // json.에서 불러온 데이터 새로운 변수에 저장
@@ -20,17 +21,7 @@ function TestPage() {
 
     return (
         <>
-            <TestRedux/>
-            <TestHandleRedux/>
-            <p>MockData TEST</p>
-            <TestMockData data={data}/>
-            <TestMyPageMockData data={user_data}/>
-            <TestMyPage data={user_data}/>
-            <TestMyPageDetail data={user_data}/>
-            <h1>
-            테스트페이지입니다.
-            </h1>
-            <TestComponent />
+            <Loading/>
 
         </>
     );
