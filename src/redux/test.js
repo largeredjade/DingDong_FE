@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 // 변수 초기화
 const initialStateValue = {student_id: "", pw: ""}
 
-export const userSlice = createSlice({
+export const testSlice = createSlice({
     name: "test",
     initialState: { value: initialStateValue},
     reducers: {
@@ -16,6 +16,6 @@ export const userSlice = createSlice({
     },
 });
 
-export const { testLogin, testLogout } = userSlice.actions;
+export const { testLogin, testLogout } = testSlice.actions;
 
-export default userSlice.reducer;
+export default testSlice.reducer;
