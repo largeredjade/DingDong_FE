@@ -1,14 +1,48 @@
-import { useState } from 'react';
 import styled from "styled-components";
 import { CameraIcon } from '../Icons/logos';
 import RecruitmentItems from "../../components/RegistrationPage/RecruitmentItems";
+import {useEffect, useMemo, useRef, useState} from "react";
 
 function RegistrationItems() {
-    // const [isRecruiting, setIsRecruiting] = useState(false);
 
-    // const handleRecruitingChange = () => {
-    //     setIsRecruiting(!isRecruiting);
-    // };
+    const fileInput = useRef(null);
+    const [imgFile, setImgFile] = useState(null);
+
+    const handleUploadBtn =(e)=>{
+        fileInput.current.click();
+    };
+
+
+    const handleUploadFile  = (e) =>{
+        const fileList = e.target.files;
+        if (fileList && fileList[0]){
+            const url = URL.createObjectURL(fileList[0]);
+            console.log('url',url);
+
+            setImgFile({
+                file: fileList[0],
+                thumbnail:url,
+                type :fileList[0].type,
+            });
+        }
+        console.log('e.target.files[0]',e.target.files[0]);
+        console.log('imgFile',imgFile);
+
+
+
+    };
+
+    const showImage = useMemo(()=>{
+        if (!imgFile && imgFile == null){
+            return <CameraIcon/>;}
+        return <img src={imgFile.thumbnail} alt={imgFile.type} onClick={handleUploadBtn}/>
+    },[imgFile]);
+
+    useEffect(() => {
+        console.log('다시 한 번 실행됩니댜')
+
+    }, [imgFile]);
+
 
     return (
         <>
@@ -16,11 +50,20 @@ function RegistrationItems() {
                 <Box>
                     <CameraBox>
                         <p>동아리 사진</p>
-                        <FileUploadBtn><CameraIcon/></FileUploadBtn>
+                        <FileUploadBtn onClick={handleUploadBtn}>
+                            {showImage}
+                        </FileUploadBtn>
+                        <input
+                            type={'file'}
+                            ref={fileInput}
+                            accept={'image/jpeg, image/jpg, image/png'}
+                            onChange={handleUploadFile}
+                            style={{display: "none"}}
+                        />
                     </CameraBox>
                     <ItemBox>
                         <p>동아리 이름</p>
-                        <WriteInput placeholder={'우리 동아리 이름을 입력해 주세요'}/>                            
+                        <WriteInput placeholder={'우리 동아리 이름을 입력해 주세요'}/>
                     </ItemBox>
                     <ItemBox>
                         <p>동아리 가입 코드</p>
@@ -62,13 +105,12 @@ const Wrapper = styled.div`
 const Box = styled.div`
     display: grid;
     grid-row:  8;
-    border-radius: 20px;
+    border-radius: 30px;
     width: 350px;
     top: 216px;
     justify-content: center;
     background: #FFFFFF;
     border: 2px solid #CFE9DC;
-    border-radius: 30px;
 `;
 
 const CameraBox = styled.div`
@@ -92,13 +134,22 @@ const ItemBox = styled.div`
     } 
 `;
 
-const FileUploadBtn = styled.button`
+const FileUploadBtn = styled.div`
     margin: 10px ;
     font-size: 20px;
     width: 100px;
     height: 100px;
     border-radius: 50px;
     border: 2px solid #B7B7B7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img{
+        width: 100px;
+        height: 100px;
+        border-radius: 50px;
+        object-fit: cover;
+    }
 `;
 
 const WriteClubActivity = styled.textarea`
