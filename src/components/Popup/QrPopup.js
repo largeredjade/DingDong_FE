@@ -1,7 +1,5 @@
 import styled from "styled-components";
 import {QRCodeCanvas} from "qrcode.react";
-import {useState} from "react";
-
 
 function QrPopup({onChange, qr_code}) {
 
