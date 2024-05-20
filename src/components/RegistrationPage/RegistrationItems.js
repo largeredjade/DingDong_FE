@@ -48,19 +48,21 @@ function RegistrationItems() {
         <>
             <Wrapper>
                 <Box>
-                    <CameraBox>
-                        <p>동아리 사진</p>
-                        <FileUploadBtn onClick={handleUploadBtn}>
-                            {showImage}
-                        </FileUploadBtn>
-                        <input
-                            type={'file'}
-                            ref={fileInput}
-                            accept={'image/jpeg, image/jpg, image/png'}
-                            onChange={handleUploadFile}
-                            style={{display: "none"}}
-                        />
-                    </CameraBox>
+                    <CameraWrap>
+                        <CameraBox>
+                            <p>동아리 사진</p>
+                            <FileUploadBtn onClick={handleUploadBtn}>
+                                {showImage}
+                            </FileUploadBtn>
+                            <input
+                                type={'file'}
+                                ref={fileInput}
+                                accept={'image/jpeg, image/jpg, image/png'}
+                                onChange={handleUploadFile}
+                                style={{display: "none"}}
+                            />
+                        </CameraBox>
+                    </CameraWrap>
                     <ItemBox>
                         <p>동아리 이름</p>
                         <WriteInput placeholder={'우리 동아리 이름을 입력해 주세요'}/>
@@ -112,6 +114,12 @@ const Box = styled.div`
     background: #FFFFFF;
     border: 2px solid #CFE9DC;
 `;
+
+const CameraWrap = styled.div`
+    display: flex;
+    justify-content: center;
+    text-align: center;
+`
 
 const CameraBox = styled.div`
     text-align: center;
