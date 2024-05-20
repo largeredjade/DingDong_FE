@@ -3,12 +3,10 @@ import styled from "styled-components";
 import LoginPopup from "../Popup/LoginPopup";
 import JoinPage from "../../pages/JoinPage";
 import JoinClubPopup from "../Popup/JoinClubPopup";
-import CameraPopup from "../Popup/CameraPopup";
-import QrPopup from "../Popup/QrPopup";
 import {useDispatch, useSelector} from "react-redux";
 import {selectIsPopupShown, showPopup} from "../../redux/loginPopup";
 import TestUpload from "./TestUpload";
-
+import QrScanPopup from "../Popup/QrScanPopup";
 
 
 function TestComponent() {
@@ -29,10 +27,6 @@ function TestComponent() {
             <div>로그인 팝업 기능 테스트 </div>
             <PopupBtn onClick={handleLogin}>팝업띄우기</PopupBtn>
             {isPopupShown && <LoginPopup/>}
-            {/*<LoginPopup/>*/}
-            {/*<JoinClubPopup/>*/}
-            <CameraPopup/>
-            {/*<QrPopup/>*/}
             <TestUpload/>
         </>
     );

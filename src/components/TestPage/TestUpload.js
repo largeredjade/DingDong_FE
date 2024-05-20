@@ -14,15 +14,19 @@ function TestUpload() {
         const fileList = e.target.files;
         if (fileList && fileList[0]){
             const url = URL.createObjectURL(fileList[0]);
+            console.log('url',url);
+
             setImgFile({
                 file: fileList[0],
                 thumbnail:url,
-                // type :fileList[0].type.slice(0,5),
                 type :fileList[0].type,
             });
         }
         console.log('e.target.files[0]',e.target.files[0]);
-        console.log('imgFile',imgFile.thumbnail);
+        console.log('imgFile',imgFile);
+
+
+
     };
 
     const showImage = useMemo(()=>{
@@ -47,7 +51,6 @@ function TestUpload() {
                 onChange={handleUploadFile}
                 style={{display:"none"}}
             />
-
             <UploadedFile>
                 {showImage}
             </UploadedFile>
@@ -62,7 +65,7 @@ const FileUploadBtn = styled.button`
     width: 100px;
     height: 100px;
     border-radius: 100%;
-    border: 1px solid ${({theme}) => theme.backgroundColor.mainColor};
+    border: 1px solid ${({theme}) => theme.backgroundColor.mainColor};;
 `
 
 const UploadedFile = styled.div`
@@ -70,6 +73,8 @@ const UploadedFile = styled.div`
         width: 100px;
         height: 100px;
         border-radius: 100%;
-        border: 1px solid ${({theme}) => theme.backgroundColor.mainColor};
+        border: 1px solid ${({theme}) => theme.backgroundColor.mainColor};;
+        
     }
+
 `
