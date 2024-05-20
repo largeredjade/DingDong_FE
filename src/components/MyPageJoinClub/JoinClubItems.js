@@ -1,6 +1,13 @@
 import styled from "styled-components";
+import {useState} from "react";
+import QrScanPopup from "../Popup/QrScanPopup";
 
 function MyPageJoinClub({data}) {
+    const [showQrScan, setShowQrScan] =useState(false);
+    const handleQrScan = ()=>{
+        setShowQrScan(!showQrScan)
+    }
+
     return (
         <>
             {data.map((item)=> (
@@ -14,7 +21,17 @@ function MyPageJoinClub({data}) {
                         <BtnCheckQR><p>출석 QR<br/>스캔하기</p></BtnCheckQR>
                     </BtnItemBox>
                 </Wrapper>
-            ))}    
+            ))}
+            <Wrapper>
+                <ItemBox>
+                    <JoinClubinfo>내가 가입한 동아리 <span>멋쟁이사자처럼</span></JoinClubinfo>
+                </ItemBox>
+                <BtnItemBox>
+                    <BtnCheckQR onClick={handleQrScan}><p>출석 QR<br/>스캔하기</p></BtnCheckQR>
+                    {showQrScan && <QrScanPopup/>}
+                </BtnItemBox>
+            </Wrapper>
+
         </>
 
     );
