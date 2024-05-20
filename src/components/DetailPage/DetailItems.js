@@ -1,13 +1,29 @@
 import styled from "styled-components";
 import { useState } from "react";
 import LoginPopup from "../Popup/LoginPopup";
+import {useDispatch, useSelector} from "react-redux";
+import {selectIsPopupShown, showPopup} from "../../redux/loginPopup";
+import {getUserInfoFromLocalStorage} from "../../auth/localStorage";
+import JoinClubPopup from "../Popup/JoinClubPopup";
 
 function DetailItems() {
-  const [showPopup, setShowPopup] = useState(false);
+  const [showJoinPopup, setShowJoinPopup] = useState(false);
+  const dispatch = useDispatch()
+  const isShowLoginPopup = useSelector(selectIsPopupShown);
 
-  const togglePopup = () => {
-    setShowPopup(!showPopup);
+
+  const handlePopup = () => {
+    const userStatus = getUserInfoFromLocalStorage();
+    if(userStatus == null){
+      dispatch(showPopup());
+    }else {
+      setShowJoinPopup(!showJoinPopup)
+    }
   };
+
+
+
+
 
   return (
     <>
@@ -62,9 +78,10 @@ function DetailItems() {
           </LargeInfoBox>
         </Box>
         <JoinBtnBox>
-          <JoinBtn onClick={togglePopup}>가입하기</JoinBtn>
-          {showPopup && <LoginPopup/>}
-          {/* <JoinClubPopup isOpen={showPopup} onClose={togglePopup} />  */}
+          <JoinBtn onClick={handlePopup}>가입하기</JoinBtn>
+          {isShowLoginPopup && <LoginPopup/>}
+          {!isShowLoginPopup && showJoinPopup && <JoinClubPopup/> }
+
         </JoinBtnBox>
       </Wrapper>
     </>
