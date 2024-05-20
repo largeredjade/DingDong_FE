@@ -1,14 +1,34 @@
 import styled from "styled-components";
+import {useState} from "react";
+import {useNavigate} from "react-router-dom";
 
 function JoinClubPopup() {
+    const [code,setCode] = useState('')
+    const navigation = useNavigate()
+
+    const handleCode = (e)=>{
+        setCode(e.target.value)
+        console.log('e.target.value:',e.target.value);
+    }
+
+    const handleSubmit = ()=>{
+        if(code == ''){
+            alert('다시 입력해 주세요.')
+        }else{
+            alert('가입 성공!')
+            navigation('/main')
+        }
+    }
     return (
         <>
             <Wrapper>
                 <PopupContent>
                     <InformJoin>
                         <p>동아리 가입코드 입력이 필요합니다.</p>
-                        <WriteInput placeholder={'동아리 가입코드를 입력해 주세요.'}/>
-                        <OkBtn>확인</OkBtn>
+                        <WriteInput
+                            onChange={handleCode}
+                            placeholder={'동아리 가입코드를 입력해 주세요.'}/>
+                        <OkBtn onClick={handleSubmit}>확인</OkBtn>
                     </InformJoin>
                 </PopupContent>
             </Wrapper>
