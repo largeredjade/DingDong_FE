@@ -2,11 +2,19 @@ import styled from "styled-components";
 import { CameraIcon } from '../Icons/logos';
 import RecruitmentItems from "../../components/RegistrationPage/RecruitmentItems";
 import {useEffect, useMemo, useRef, useState} from "react";
+import moment from "moment";
 
 function RegistrationItems() {
 
     const fileInput = useRef(null);
     const [imgFile, setImgFile] = useState(null);
+    const [isOpen1, setIsOpen1] = useState(false);
+    const [isOpen2, setIsOpen2] = useState(false);
+    const today = new Date();
+    const [date1, setDate1] = useState(moment(today).format("YYYY. MM. DD"));
+    const [date2, setDate2] = useState(moment(today).format("YYYY. MM. DD"));
+    const [recruitmentStatus, setRecruitmentStatus] = useState(false);
+
 
     const handleUploadBtn =(e)=>{
         fileInput.current.click();
@@ -43,6 +51,29 @@ function RegistrationItems() {
 
     }, [imgFile]);
 
+    const handleToggleCalendar1 = () => {
+        setIsOpen1(!isOpen1);
+        setIsOpen2(false);
+    };
+
+    const handleToggleCalendar2 = () => {
+        setIsOpen2(!isOpen2);
+        setIsOpen1(false);
+    };
+
+    const handleDateChange1 = (selectedDate) => {
+        setIsOpen1(false);
+        setDate1(moment(selectedDate).format("YYYY. MM. DD"));
+    };
+
+    const handleDateChange2 = (selectedDate) => {
+        setIsOpen2(false);
+        setDate2(moment(selectedDate).format("YYYY. MM. DD"));
+    };
+
+    const handleRecruitmentStatusChange = () => {
+        setRecruitmentStatus(!recruitmentStatus);
+    };
 
     return (
         <>
@@ -87,7 +118,18 @@ function RegistrationItems() {
                         <p>연락처</p>
                         <WriteInput placeholder={'ex) 010-1234-5678'}/>
                     </ItemBox>
-                    <RecruitmentItems/>
+                    <RecruitmentItems
+                        isOpen1={isOpen1}
+                        isOpen2={isOpen2}
+                        date1={date1}
+                        date2={date2}
+                        recruitmentStatus={recruitmentStatus}
+                        handleToggleCalendar1={handleToggleCalendar1}
+                        handleToggleCalendar2={handleToggleCalendar2}
+                        handleDateChange1={handleDateChange1}
+                        handleDateChange2={handleDateChange2}
+                        handleRecruitmentStatusChange={handleRecruitmentStatusChange}
+                    />
                 </Box>
                 <RegstrationBtnBox>
                     <RegstrationBtn>등록하기</RegstrationBtn>
@@ -190,38 +232,6 @@ const WriteInput = styled.input`
         border: 2px solid ${({theme})=> theme.colors.mainColorDark};
     }
 `;
-
-// const CheckboxContainer = styled.div`
-//     display: flex;
-//     align-items: center;
-//     margin: 10px;
-// `;
-
-// const Checkbox = styled.div`
-//     display: flex;
-//     margin-right: 20px;
-//     cursor: pointer;
-
-//     input[type="checkbox"] {
-//         display: none;
-//     }
-
-//     span {
-//         display: inline-block;
-//         width: 20px;
-//         height: 20px;
-//         border: 2px solid ${({theme})=> theme.colors.darkGray};
-//         border-radius: 4px;
-//         margin-right: 8px;
-//         background-color: ${({checked}) => checked ? theme.colors.mainColorDark : 'transparent'};
-//         transition: background-color 0.3s ease;
-//     }
-// `;
-
-// const DateBox = styled.div`
-//     display: flex;
-//     margin-bottom: 30px;
-//`
 
 const RegstrationBtnBox = styled.div`
     display: flex;

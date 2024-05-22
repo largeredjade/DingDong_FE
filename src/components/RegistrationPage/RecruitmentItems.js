@@ -4,115 +4,109 @@ import Calendar from "react-calendar";
 import moment from "moment";
 import CalendarSVG from "./calendar-check-svgrepo-com.svg";
 
-const RecruitmentItems = () => {
-    const today = new Date();
-    const [isOpen1, setIsOpen1] = useState(false);
-    const [isOpen2, setIsOpen2] = useState(false);
-    const [date1, setDate1] = useState(moment(today).format("YYYY. MM. DD"));
-    const [date2, setDate2] = useState(moment(today).format("YYYY. MM. DD"));
-    const [recruitmentStatus, setRecruitmentStatus] = useState(false);
-
-    const handleToggleCalendar1 = () => {
-        setIsOpen1(!isOpen1);
-        setIsOpen2(false);
-    };
-
-    const handleToggleCalendar2 = () => {
-        setIsOpen2(!isOpen2);
-        setIsOpen1(false);
-    };
-
-    const handleDateChange1 = (selectedDate) => {
-        setIsOpen1(false);
-        setDate1(moment(selectedDate).format("YYYY. MM. DD"));
-    };
-
-    const handleDateChange2 = (selectedDate) => {
-        setIsOpen2(false);
-        setDate2(moment(selectedDate).format("YYYY. MM. DD"));
-    };
-    const handleRecruitmentStatusChange = () => {
-        setRecruitmentStatus(!recruitmentStatus);
-    };
-    return (
+const RecruitmentItems = ({
+  isOpen1,
+  isOpen2,
+  date1,
+  date2,
+  recruitmentStatus,
+  handleToggleCalendar1,
+  handleToggleCalendar2,
+  handleDateChange1,
+  handleDateChange2,
+  handleRecruitmentStatusChange
+}) => {
+  return (
+    <>
+      <ItemBox>
+        <RecruitInfo>모집 여부</RecruitInfo>
+        <CheckboxWrapper>
+          <input
+            type="checkbox"
+            checked={recruitmentStatus}
+            onChange={handleRecruitmentStatusChange}
+          />
+          <Label>예</Label>
+          <input
+            type="checkbox"
+            checked={!recruitmentStatus}
+            onChange={handleRecruitmentStatusChange}
+          />
+          <Label>아니요</Label>
+        </CheckboxWrapper>
+      </ItemBox>
+      {recruitmentStatus && (
         <>
-            <ItemBox>
-                <RecruitInfo>모집 여부</RecruitInfo>
-                <CheckboxWrapper>
-                    <input
-                        type="checkbox"
-                        checked={recruitmentStatus}
-                        onChange={handleRecruitmentStatusChange}
+          <ItemBox>
+            <RecruitInfo>모집 시작일</RecruitInfo>
+            <CalendarContainer>
+              <DropdownButton onClick={handleToggleCalendar1}>
+                {date1}
+                <ButtonWithImageContainer>
+                  <ImgLocation>
+                    <img
+                      src={CalendarSVG}
+                      alt="calendar"
+                      style={{ width: "auto", height: "26.25px" }}
                     />
-                    <Label>예</Label>
-                    <input
-                        type="checkbox"
-                        checked={!recruitmentStatus}
-                        onChange={handleRecruitmentStatusChange}
+                  </ImgLocation>
+                </ButtonWithImageContainer>
+              </DropdownButton>
+              <CalendarWrapper isOpen={isOpen1}>
+                <StyledCalendar
+                  onChange={handleDateChange1}
+                  value={new Date(date1)} // moment를 사용하여 Date 객체로 변환
+                  view="month"
+                  next2Label={null}
+                  prev2Label={null}
+                  calendarType="gregory"
+                  showNeighboringMonth={false}
+                  formatDay={(locale, date) => moment(date).format("D")}
+                  formatYear={(locale, date) => moment(date).format("YYYY")}
+                  formatMonthYear={(locale, date) =>
+                    moment(date).format("YYYY. MM")
+                  }
+                />
+              </CalendarWrapper>
+            </CalendarContainer>
+          </ItemBox>
+          <ItemBox>
+            <RecruitInfo>모집 마감일</RecruitInfo>
+            <CalendarContainer>
+              <DropdownButton onClick={handleToggleCalendar2}>
+                {date2}
+                <ButtonWithImageContainer>
+                  <ImgLocation>
+                    <img
+                      src={CalendarSVG}
+                      alt="calendar"
+                      style={{ width: "auto", height: "26.25px" }}
                     />
-                    <Label>아니요</Label>
-                </CheckboxWrapper>
-            </ItemBox>
-            {recruitmentStatus && (
-                <>
-                    <ItemBox>
-                        <RecruitInfo>모집 시작일</RecruitInfo>
-                        <CalendarContainer>
-                            <DropdownButton onClick={handleToggleCalendar1}>
-                                {date1}
-                                <ButtonWithImageContainer>
-                                    <ImgLocation>
-                                        <img src={CalendarSVG} alt="calendar" style={{ width: 'auto', height: '26.25px'}}/>
-                                    </ImgLocation>
-                                </ButtonWithImageContainer>
-                            </DropdownButton>
-                            <CalendarWrapper isOpen={isOpen1}>
-                                <StyledCalendar
-                                    onChange={handleDateChange1}
-                                    value={date1}
-                                    view="month"
-                                    next2Label={null}
-                                    prev2Label={null}
-                                    calendarType="gregory"
-                                    showNeighboringMonth={false}
-                                    formatDay={(locale, date) => moment(date).format("D")}
-                                    formatYear={(locale, date) => moment(date).format("YYYY")}
-                                    formatMonthYear={(locale, date) => moment(date).format("YYYY. MM")}
-                                />
-                            </CalendarWrapper>
-                        </CalendarContainer>
-                    </ItemBox>
-                    <ItemBox>
-                        <RecruitInfo>모집 마감일</RecruitInfo>
-                        <CalendarContainer>
-                            <DropdownButton onClick={handleToggleCalendar2}>
-                                {date2}
-                                <ButtonWithImageContainer>
-                                    <ImgLocation>
-                                        <img src={CalendarSVG} alt="calendar" style={{ width: 'auto', height: '26.25px'}}/>
-                                    </ImgLocation>
-                                </ButtonWithImageContainer>
-                            </DropdownButton>
-                            <CalendarWrapper isOpen={isOpen2}>
-                                <StyledCalendar
-                                    onChange={handleDateChange2}
-                                    value={date2}
-                                    view="month"
-                                    next2Label={null}
-                                    prev2Label={null}
-                                    calendarType="gregory"
-                                    showNeighboringMonth={false}
-                                    formatDay={(locale, date) => moment(date).format("D")}
-                                    formatYear={(locale, date) => moment(date).format("YYYY")}
-                                    formatMonthYear={(locale, date) => moment(date).format("YYYY. MM")}
-                                />
-                            </CalendarWrapper>
-                        </CalendarContainer>
-                    </ItemBox>
-                </>
-            )}
+                  </ImgLocation>
+                </ButtonWithImageContainer>
+              </DropdownButton>
+              <CalendarWrapper isOpen={isOpen2}>
+                <StyledCalendar
+                  onChange={handleDateChange2}
+                  value={new Date(date2)} // moment를 사용하여 Date 객체로 변환
+                  view="month"
+                  next2Label={null}
+                  prev2Label={null}
+                  calendarType="gregory"
+                  showNeighboringMonth={false}
+                  formatDay={(locale, date) => moment(date).format("D")}
+                  formatYear={(locale, date) => moment(date).format("YYYY")}
+                  formatMonthYear={(locale, date) =>
+                    moment(date).format("YYYY. MM")
+                  }
+                />
+              </CalendarWrapper>
+            </CalendarContainer>
+          </ItemBox>
         </>
-    );
+      )}
+    </>
+  );
 };
 
 export default  RecruitmentItems;

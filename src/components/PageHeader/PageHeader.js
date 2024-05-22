@@ -37,7 +37,7 @@ function PageHeader() {
                         to={'/registration'} selected={currentPath === '/registration'}>동아리 등록</StyledLink>
                     <StyledLink
                         onClick={handleLoginPopup}
-                        to={'/mypage'} selected={currentPath === '/mypage' || currentPath === '/mypage/joinclub' || currentPath ==='/mypage/clubedit'}>마이페이지</StyledLink>
+                        to={'/mypage'} selected={currentPath === '/mypage' || currentPath.startsWith("/mypage/")}>마이페이지</StyledLink>
                 </ItemBox>
             </Wrap>
             
