@@ -6,7 +6,7 @@ import {selectIsPopupShown, showPopup} from "../../redux/loginPopup";
 import {getUserInfoFromLocalStorage} from "../../auth/localStorage";
 import JoinClubPopup from "../Popup/JoinClubPopup";
 
-function DetailItems() {
+function DetailItems({clubDetails}) {
   const [showJoinPopup, setShowJoinPopup] = useState(false);
   const dispatch = useDispatch()
   const isShowLoginPopup = useSelector(selectIsPopupShown);
@@ -27,63 +27,55 @@ function DetailItems() {
 
   return (
     <>
-      <Wrapper>
-        <Box>
-          <Date>D-7</Date>
-          <LargeInfoBox>
-            <Intro>
-              <ClubPhotoBox>
-                <img src=".//DetailPage/ClubviewDetail.png" />
-              </ClubPhotoBox>
-              <ClubBox>
-                <ClubName>
-                  <p>멋쟁이 사자처럼</p>
-                </ClubName>
-                <ClubMem>
-                  <Member>부원</Member>
-                  <Num>0</Num>
-                </ClubMem>
-              </ClubBox>
-            </Intro>
-            <ClubInfo>
-              <ItemBox>
-                <Bold>활동 시간</Bold>
-                <p>매주 목요일 오후 7시</p>
-              </ItemBox>
-              <ItemBox>
-                <Bold>동아리 소개</Bold>
-                <p>
-                  비전공자를 위한 웹개발 동아리
-                  <br />
-                  받고 중앙 연합 동아리까쥐~!
-                </p>
-              </ItemBox>
-              <ItemBox>
-                <Bold>활동 내용 </Bold>
-                <p>
-                  멋사의 꽃 해커톤 나가요...세션하고...
-                  <br />
-                  프로젝트도 해요..다같이 성장...!
-                  <br />
-                  미쳐도 같이 미쳐요...!
-                  <br />
-                  아자아자 화이팅~!~!!~!
-                </p>
-              </ItemBox>
-              <ItemBox>
-                <Bold>연락처</Bold>
-                <p>010-1234-5678</p>
-              </ItemBox>
-            </ClubInfo>
-          </LargeInfoBox>
-        </Box>
-        <JoinBtnBox>
-          <JoinBtn onClick={handlePopup}>가입하기</JoinBtn>
-          {isShowLoginPopup && <LoginPopup/>}
-          {!isShowLoginPopup && showJoinPopup && <JoinClubPopup/> }
 
-        </JoinBtnBox>
-      </Wrapper>
+      {clubDetails.map((item) => (
+        <Wrapper>
+          <Box key={item.club_id}>
+            <Date>{item.remaining_days}</Date>
+            <LargeInfoBox>
+              <Intro>
+                <ClubPhotoBox>
+                  <img src=".//MainPage/Clubview.png" />
+                </ClubPhotoBox>
+                <ClubBox>
+                  <ClubName>
+                    <p>{item.club_name}</p>
+                  </ClubName>
+                  <ClubMem>
+                    <Member>부원</Member>
+                    <Num>{item.club_member}</Num>
+                  </ClubMem>
+                </ClubBox>
+              </Intro>
+              <ClubInfo>
+                <ItemBox>
+                  <Bold>활동 시간</Bold>
+                  <p>{item.club_time}</p>
+                </ItemBox>
+                <ItemBox>
+                  <Bold>동아리 소개</Bold>
+                  <p>{item.club_introduction}</p>
+                </ItemBox>
+                <ItemBox>
+                  <Bold>활동 내용 </Bold>
+                  <p>{item.club_details}</p>
+                </ItemBox>
+                <ItemBox>
+                  <Bold>연락처</Bold>
+                  <p>{item.club_contact}</p>
+                </ItemBox>
+              </ClubInfo>
+            </LargeInfoBox>
+          </Box>
+
+          {item.remaining_days !== "모집 마감" && (
+            <JoinBtnBox>
+              <JoinBtn onClick={handlePopup}>가입하기</JoinBtn>
+              {showJoinPopup && <LoginPopup />}
+            </JoinBtnBox>
+          )}
+        </Wrapper>
+      ))}
     </>
   );
 }

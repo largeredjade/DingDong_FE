@@ -1,6 +1,7 @@
 {
   "club_id": "1",
   "club_name": "Club A",
+  "remaining_days": "D-4",
   "club_time": "Every Wednesday",
   "club_introduction": "intro",
   "club_details": "detail",
