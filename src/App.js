@@ -12,12 +12,13 @@ import EditClubPage from "./pages/EditClubPage";
 import DetailPage from "./pages/DetailPage";
 
 function App() {
+
   return (
       <Wrapper>
           <Container>
               <Routes>
                   <Route path="/" element={<HomePage/>}/>
-                  <Route path={"/test"} element={<TestPage/>}/>
+                  <Route path={`/test/:id`} element={<TestPage/>}/>
                   <Route path={"/main"} element={<MainPage/>}/>
                   <Route path={"/login"} element={<LoginPage/>}/>
                   <Route path={"/join"} element={<JoinPage/>}/>

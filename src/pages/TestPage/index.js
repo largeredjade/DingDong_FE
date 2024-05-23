@@ -9,6 +9,7 @@ import TestHandleRedux from "../../components/TestPage/TestHandleRedux";
 import TestMyPage from "../../components/TestPage/TestMypage";
 import TestMyPageDetail from "../../components/TestPage/TestMypageDetail";
 import Loading from "../../components/LoadingSpinner/Loading";
+import {Link, useLocation, useNavigate, useParams} from "react-router-dom";
 
 function TestPage() {
     // json.에서 불러온 데이터 새로운 변수에 저장
@@ -17,11 +18,15 @@ function TestPage() {
     const user_data = [manager_user];
     console.log(user_data)
 
+    //동적 라우팅
+    const params = useParams();
+
 
 
     return (
         <>
-            <Loading/>
+            {/*<Loading/>*/}
+            <TestMockData data={data} params={params}/>
 
         </>
     );
