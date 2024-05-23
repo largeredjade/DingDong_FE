@@ -5,12 +5,12 @@ import {Link, useLocation} from "react-router-dom";
 
 function MyPageItems({data}) {
     const [isShowQr, setIsShowQr] =useState(false)
+
     const handleQrPopup = ()=>{
         setIsShowQr(!isShowQr)
     }
     const location = useLocation();
     const currentPath = location.pathname;
-    
     return (
         <>  
             {isShowQr && <QrPopup onChange={handleQrPopup} qr_code={"https://www.notion.so/hufsglobal/HUFS-12-e23a2e85170c4dca85a689949b424309"}/>}
@@ -25,7 +25,7 @@ function MyPageItems({data}) {
                     <BtnItemBox>
                         <BtnQR onClick={handleQrPopup}><p>출석 QR<br/>생성하기</p></BtnQR>
                         <BtnModify>
-                            <Link to={`/mypage/clubedit/${item.user_id}`} selected={currentPath === `/mypage/clubedit/${item.user_id}`}>
+                            <Link to={'/mypage/clubedit'} selected={currentPath === '/mypage/clubedit'}>
                                 <p>동아리 정보</p><p>수정하기</p>
                             </Link>
                         </BtnModify>
