@@ -1,4 +1,4 @@
-import {Link, useNavigate, useParams} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import styled from "styled-components";
 import {removeUserInfo} from "../../auth/localStorage";
 
@@ -9,7 +9,6 @@ function MyPageClubItems({data}) {
         navigate('/main')
 
     }
-    
     return (
         <>
             {data.map((item)=>(
@@ -19,10 +18,10 @@ function MyPageClubItems({data}) {
                     </ItemBox>
                     <ClubBtnBox>
                         {item.register_clubs.map((i)=>(
-                        <ClubLink  key={i.club_id} to={`/mypage/joinclub/${i.club_id}`}>{i.name}</ClubLink>
+                        <ClubLink to={'/mypage/joinclub'}>{i.name}</ClubLink>
                         ))}
                         {item.joined_clubs.map((i)=>(
-                        <ClubLink key={i.club_id} to={`/mypage/joinclub/${i.club_id}`}>{i.name}</ClubLink>
+                        <ClubLink to={'/mypage/joinclub'}>{i.name}</ClubLink>
                         ))}
                     </ClubBtnBox>
                     <LogoutBtnBox>
