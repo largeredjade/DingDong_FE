@@ -1,6 +1,5 @@
 import {Link, useNavigate} from "react-router-dom";
 import styled from "styled-components";
-import {removeUserInfo} from "../../auth/localStorage";
 
 function MyPageDetail({data}) {
     return (

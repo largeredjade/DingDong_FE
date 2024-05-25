@@ -3,8 +3,8 @@ import { useState } from "react";
 import LoginPopup from "../Popup/LoginPopup";
 import {useDispatch, useSelector} from "react-redux";
 import {selectIsPopupShown, showPopup} from "../../redux/loginPopup";
-import {getUserInfoFromLocalStorage} from "../../auth/localStorage";
 import JoinClubPopup from "../Popup/JoinClubPopup";
+import {getCookie} from "../../auth/cookie";
 
 function DetailItems({clubDetails}) {
   const [showJoinPopup, setShowJoinPopup] = useState(false);
@@ -13,8 +13,8 @@ function DetailItems({clubDetails}) {
 
 
   const handlePopup = () => {
-    const userStatus = getUserInfoFromLocalStorage();
-    if(userStatus == null){
+    const userStatus = getCookie('access');
+    if(userStatus === undefined){
       dispatch(showPopup());
     }else {
       setShowJoinPopup(!showJoinPopup)
@@ -24,59 +24,59 @@ function DetailItems({clubDetails}) {
 
 
 
-
   return (
-    <>
+      <>
 
-      {clubDetails.map((item) => (
-        <Wrapper>
-          <Box key={item.club_id}>
-            <Date>{item.remaining_days}</Date>
-            <LargeInfoBox>
-              <Intro>
-                <ClubPhotoBox>
-                  <img src=".//MainPage/Clubview.png" />
-                </ClubPhotoBox>
-                <ClubBox>
-                  <ClubName>
-                    <p>{item.club_name}</p>
-                  </ClubName>
-                  <ClubMem>
-                    <Member>부원</Member>
-                    <Num>{item.club_member}</Num>
-                  </ClubMem>
-                </ClubBox>
-              </Intro>
-              <ClubInfo>
-                <ItemBox>
-                  <Bold>활동 시간</Bold>
-                  <p>{item.club_time}</p>
-                </ItemBox>
-                <ItemBox>
-                  <Bold>동아리 소개</Bold>
-                  <p>{item.club_introduction}</p>
-                </ItemBox>
-                <ItemBox>
-                  <Bold>활동 내용 </Bold>
-                  <p>{item.club_details}</p>
-                </ItemBox>
-                <ItemBox>
-                  <Bold>연락처</Bold>
-                  <p>{item.club_contact}</p>
-                </ItemBox>
-              </ClubInfo>
-            </LargeInfoBox>
-          </Box>
+        {clubDetails.map((item) => (
+            <Wrapper>
+              <Box key={item.club_id}>
+                <Date>{item.remaining_days}</Date>
+                <LargeInfoBox>
+                  <Intro>
+                    <ClubPhotoBox>
+                      <img src=".//MainPage/Clubview.png" />
+                    </ClubPhotoBox>
+                    <ClubBox>
+                      <ClubName>
+                        <p>{item.club_name}</p>
+                      </ClubName>
+                      <ClubMem>
+                        <Member>부원</Member>
+                        <Num>{item.club_member}</Num>
+                      </ClubMem>
+                    </ClubBox>
+                  </Intro>
+                  <ClubInfo>
+                    <ItemBox>
+                      <Bold>활동 시간</Bold>
+                      <p>{item.club_time}</p>
+                    </ItemBox>
+                    <ItemBox>
+                      <Bold>동아리 소개</Bold>
+                      <p>{item.club_introduction}</p>
+                    </ItemBox>
+                    <ItemBox>
+                      <Bold>활동 내용 </Bold>
+                      <p>{item.club_details}</p>
+                    </ItemBox>
+                    <ItemBox>
+                      <Bold>연락처</Bold>
+                      <p>{item.club_contact}</p>
+                    </ItemBox>
+                  </ClubInfo>
+                </LargeInfoBox>
+              </Box>
 
-          {item.remaining_days !== "모집 마감" && (
-            <JoinBtnBox>
-              <JoinBtn onClick={handlePopup}>가입하기</JoinBtn>
-              {showJoinPopup && <LoginPopup />}
-            </JoinBtnBox>
-          )}
-        </Wrapper>
-      ))}
-    </>
+              {item.remaining_days !== "모집 마감" && (
+                  <JoinBtnBox>
+                    <JoinBtn onClick={handlePopup}>가입하기</JoinBtn>
+                    {isShowLoginPopup && <LoginPopup />}
+                    {showJoinPopup && <JoinClubPopup/>}
+                  </JoinBtnBox>
+              )}
+            </Wrapper>
+        ))}
+      </>
   );
 }
 
@@ -179,7 +179,7 @@ const ItemBox = styled.div`
   margin: 10px 15px 10px 15px;
   p {
     font-size: 18px;
-    line-height: 22px; 
+    line-height: 22px;
   }
   width: 299px;
 `;

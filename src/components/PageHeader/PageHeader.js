@@ -3,8 +3,8 @@ import {Link, useLocation} from "react-router-dom";
 import {HeaderLogo} from "../../components/Icons/logos";
 import {useDispatch, useSelector} from "react-redux";
 import {selectIsPopupShown, showPopup} from "../../redux/loginPopup";
-import {getUserInfoFromLocalStorage} from "../../auth/localStorage";
 import LoginPopup from "../Popup/LoginPopup";
+import {getCookie} from "../../auth/cookie";
 
 function PageHeader() {
     const location = useLocation();
@@ -14,8 +14,8 @@ function PageHeader() {
 
 
     const handleLoginPopup = () => {
-        const userStatus = getUserInfoFromLocalStorage();
-        if(userStatus == null){
+        const userStatus = getCookie('access');
+        if(userStatus === undefined){
             dispatch(showPopup());
         }
     };

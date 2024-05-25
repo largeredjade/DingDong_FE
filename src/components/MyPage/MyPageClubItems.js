@@ -1,11 +1,11 @@
 import {Link, useNavigate} from "react-router-dom";
 import styled from "styled-components";
-import {removeUserInfo} from "../../auth/localStorage";
+import {removeCookie} from "../../auth/cookie";
 
 function MyPageClubItems({data}) {
     const navigate = useNavigate()
     const handleLogout = ()=>{
-        removeUserInfo()
+        removeCookie('access')
         navigate('/main')
 
     }
