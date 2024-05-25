@@ -262,7 +262,7 @@ const WriteInput = styled.input`
   height: 51px;
   border-radius: 20px;
   border: 2px solid #b7b7b7;
-  color: ${({ theme }) => theme.colors.darkGray};
+  color: ${({ theme }) => theme.colors.white};
   outline: none;
   &:hover {
     border: 2px solid ${({ theme }) => theme.colors.mainColorDark};
