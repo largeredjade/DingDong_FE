@@ -25,7 +25,7 @@ function App() {
                   <Route path={"/mypage"} element={<MyPage/>}/>
                   <Route path={"/mypage/joinclub"} element={<MyPageJoinClub/>}/>
                   <Route path={"/registration"} element={<RegistrationPage/>}/>
-                  <Route path={"/main/detail"} element={<DetailPage/>}/>
+                  <Route path={`/main/:club_id`} element={<DetailPage/>}/>
                   <Route path={"/mypage/clubedit"} element={<EditClubPage/>}/>
               </Routes>
           </Container>

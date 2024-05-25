@@ -3,6 +3,7 @@ import MainItems from "../../components/MainPage/MainItems";
 import styled from "styled-components";
 import React, { useState } from "react";
 import allclubs from "../../mockdata/mainpage/allclubs.json";
+import {Link, useLocation, useNavigate, useParams} from "react-router-dom";
 
 function MainPage() {
   const [currentButton, setCurrentButton] = useState(1);
@@ -21,6 +22,7 @@ function MainPage() {
     return data;
   };
   const filteredData = getFilteredData();
+  const params = useParams();
   return (
     <>
       <Wrap>
@@ -38,7 +40,7 @@ function MainPage() {
             </NowBtn>
           </NowBtnBox>
           <ItemBox>
-                <MainItems data={filteredData} />
+                <MainItems data={filteredData} params={params}/>
           </ItemBox>
         </MaincontentBox>
       </Wrap>
