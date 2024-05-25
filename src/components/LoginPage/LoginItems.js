@@ -1,9 +1,10 @@
 import {Link,  useNavigate} from "react-router-dom";
 import styled from "styled-components";
 import {useState} from "react";
-import {saveUserInfoToLocalStorage} from "../../auth/localStorage";
 import {useDispatch} from "react-redux";
 import {closePopup} from "../../redux/loginPopup";
+import axios from "axios";
+import {setCookie} from "../../auth/cookie";
 
 
 function LoginItems() {
@@ -25,31 +26,26 @@ function LoginItems() {
     };
 
     // api 연동
-    // async function handleSubmit (e){
-    //       e.preventDefault();
-    //     console.log('values',values);
-    //      await axios.post('https://dingdong.com/api/login',values)
-    //     navigate('/main')
-    //     //로컬스토리지에 유저 정보 저장
-    //     saveUserInfoToLocalStorage(values)
-    //
-    //   }
-
-    function handleSubmit (e){
+    async function handleSubmit (e){
         e.preventDefault();
         if (values.student_id == '' || values.password ==''){
             alert('모든 필드를 채워주세요!')
         }else{
             try{
-                saveUserInfoToLocalStorage(values)
-                console.log('values',values);
+               const response = await axios.post('https://dingdong7.pythonanywhere.com/login/',values,{withCredentials: true})
+                console.log('Response:', response);
+                console.log("token.access::",response.data.token.access);
+                // (name, value, options)
+                setCookie("access",response.data.token.access)
                 dispatch(closePopup());
                 navigate('/main')
             }catch (error){
                 alert('로그인에 실패했습니다. 다시 시도해 주세요.')
+                console.log("error:",error);
             }
         }
-    }
+
+      }
 
 
 
