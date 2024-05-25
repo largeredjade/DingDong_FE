@@ -1,28 +1,33 @@
 import styled from "styled-components";
 import { useState } from "react";
 import LoginPopup from "../Popup/LoginPopup";
-import { useDispatch, useSelector } from "react-redux";
-import { selectIsPopupShown, showPopup } from "../../redux/loginPopup";
-import { getUserInfoFromLocalStorage } from "../../auth/localStorage";
+import {useDispatch, useSelector} from "react-redux";
+import {selectIsPopupShown, showPopup} from "../../redux/loginPopup";
+import {getUserInfoFromLocalStorage} from "../../auth/localStorage";
 import JoinClubPopup from "../Popup/JoinClubPopup";
-import React from 'react';
 
-function DetailItems({ clubDetails }) {
+function DetailItems({clubDetails}) {
   const [showJoinPopup, setShowJoinPopup] = useState(false);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const isShowLoginPopup = useSelector(selectIsPopupShown);
+
 
   const handlePopup = () => {
     const userStatus = getUserInfoFromLocalStorage();
-    if (userStatus == null) {
+    if(userStatus == null){
       dispatch(showPopup());
-    } else {
-      setShowJoinPopup(!showJoinPopup);
+    }else {
+      setShowJoinPopup(!showJoinPopup)
     }
   };
- 
+
+
+
+
+
   return (
     <>
+
       {clubDetails.map((item) => (
         <Wrapper>
           <Box key={item.club_id}>
@@ -62,6 +67,7 @@ function DetailItems({ clubDetails }) {
               </ClubInfo>
             </LargeInfoBox>
           </Box>
+
           {item.remaining_days !== "모집 마감" && (
             <JoinBtnBox>
               <JoinBtn onClick={handlePopup}>가입하기</JoinBtn>
@@ -126,6 +132,12 @@ const ClubPhotoBox = styled.div`
   }
 `;
 
+// const ClubPhoto = styled.div`
+//     width: 91px;
+//     height: 91px;
+//     border-radius: 45.5px;
+// `
+
 const ClubBox = styled.div`
   display: grid;
   grid-column-gap: 10px;
@@ -167,7 +179,7 @@ const ItemBox = styled.div`
   margin: 10px 15px 10px 15px;
   p {
     font-size: 18px;
-    line-height: 22px;
+    line-height: 22px; 
   }
   width: 299px;
 `;
