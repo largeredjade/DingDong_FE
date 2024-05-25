@@ -1,12 +1,25 @@
 import { Link } from "react-router-dom/dist";
 import styled from "styled-components";
+import { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 function MainItems({ data }) {
+  const params = useParams();
+  const [localParams, setLocalParams] = useState(params);
+  const navigate = useNavigate();
+  const handleParams = (club_id) => {
+    setLocalParams((prevParams) => ({
+      ...prevParams,
+      id: club_id,
+    }));
+    navigate(`/main/club_id:${club_id}`);
+    console.log("params.id:", localParams);
+  };
   return (
     <>
-      <Wrapper to={"/main/detail"}>
+      <Wrapper>
         {data.map((item) => (
-          <Box key={item.club_id}>
+          <Box key={item.club_id} onClick={() => handleParams(item.club_id)}>
             <Date>{item.remaining_days}</Date>
             <SmallInfoBox>
               <ClubPhotoBox>
@@ -30,7 +43,7 @@ function MainItems({ data }) {
 
 export default MainItems;
 
-const Wrapper = styled(Link)``;
+const Wrapper = styled.div``;
 
 const Box = styled.div`
   width: 350px;
@@ -102,11 +115,10 @@ const ClubIntro = styled.div`
     font-size: 15px;
     color: #616161;
     display: -webkit-box;
-  -webkit-line-clamp: 2; /* 표시할 줄 수 */
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: normal;
+    -webkit-line-clamp: 2; /* 표시할 줄 수 */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
   }
 `;
-
