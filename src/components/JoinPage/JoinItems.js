@@ -78,7 +78,7 @@ function JoinItems() {
                         value={values.password}
                         onChange={handleChange}
                         type={"password"}
-                        placeholder={'비밀번호를 입력해 주세요.'}/>
+                        placeholder={'한영 포함 9글자 이상 작성해 주세요.'}/>
                 </ItemBox>
                 <ItemBox>
                     <p>비밀번호 확인</p>
