@@ -3,7 +3,7 @@ import styled from "styled-components";
 import {useState} from "react";
 import {useDispatch} from "react-redux";
 import {closePopup} from "../../redux/loginPopup";
-import axios from "axios";
+import axiosInstance from '../../lib/axios'
 import {setCookie} from "../../auth/cookie";
 
 
@@ -28,23 +28,24 @@ function LoginItems() {
     // api 연동
     async function handleSubmit (e){
         e.preventDefault();
-        if (values.student_id == '' || values.password ==''){
-            alert('모든 필드를 채워주세요!')
-        }else{
-            try{
-               const response = await axios.post('https://dingdong7.pythonanywhere.com/login/',values,{withCredentials: true})
+        if (values.student_id === '' || values.password === '') {
+            alert('모든 필드를 채워주세요!');
+        } else {
+            try {
+                const response = await axiosInstance.post('/login/', values);
                 console.log('Response:', response);
-               setCookie('user_id', response.data.user.user_id)
-                setCookie("access",response.data.token.access)
+                setCookie('user_id', response.data.user.user_id);
+                setCookie("access", response.data.token.access);
                 dispatch(closePopup());
-                navigate('/main')
-            }catch (error){
-                alert('로그인에 실패했습니다. 다시 시도해 주세요.')
-                console.log("error:",error);
+                navigate('/main');
+            } catch (error) {
+                alert('로그인에 실패했습니다. 다시 시도해 주세요.');
+                console.log("error:", error);
             }
         }
 
-      }
+
+    }
 
 
 

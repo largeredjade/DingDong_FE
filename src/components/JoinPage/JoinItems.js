@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
-import axios from "axios";
+import axiosInstance from "../../lib/axios";
+
 
 
 function JoinItems() {
@@ -35,9 +36,8 @@ function JoinItems() {
             alert('비밀번호가 일치하지 않습니다. 다시 입력해 주세요');
         }
         try {
-            const response = await axios.post('https://dingdong7.pythonanywhere.com/signup/', values,{
-                withCredentials: true
-            });
+            const response = await axiosInstance.post('/signup/', values);
+
             console.log('Response:', response);
             alert('회원가입 성공');
             navigate('/login');
@@ -46,7 +46,6 @@ function JoinItems() {
             alert('회원가입에 실패했습니다. 다시 시도해주세요.', error.message);
         }
     }
-
 
 
     return (
