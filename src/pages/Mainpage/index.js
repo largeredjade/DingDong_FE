@@ -1,46 +1,59 @@
 import PageHeader from "../../components/PageHeader/PageHeader";
 import MainItems from "../../components/MainPage/MainItems";
 import styled from "styled-components";
-import React, { useState } from "react";
-import allclubs from "../../mockdata/mainpage/allclubs.json";
-import {Link, useLocation, useNavigate, useParams} from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import axiosInstance from "../../lib/axios";
+
 
 function MainPage() {
-  const [currentButton, setCurrentButton] = useState(1);
+  const [clubData, setClubData] =  useState(null)
+  const buttonStates = ["전체보기", "모집중", "모집마감"];
+  const [buttonIndex, setButtonIndex] = useState(0);
 
-  const handleToggle = () => {
-    setCurrentButton((prevButton) => (prevButton === 3 ? 1 : prevButton + 1));
+  const handleButtonClick = () => {
+    setButtonIndex((prevIndex) => (prevIndex + 1) % buttonStates.length);
   };
 
-  const data = allclubs.clubs;
-  const getFilteredData = () => {
-    if (currentButton === 2) {
-      return data.filter(club => club.club_open);
-    } else if (currentButton === 3) {
-      return data.filter(club => !club.club_open);
+
+  useEffect(() => {
+    const fetchClubData = async () => {
+      try {
+        const response = await axiosInstance.get('/allclubs/' );
+        setClubData(response.data)
+        console.log('response::',response);
+        console.log('clubData::::',clubData);
+      } catch (error) {
+        console.error("Failed to fetch club data:", error);
+      }
+    };
+    fetchClubData();
+  }, []);
+
+  const filterData = (data, buttonIndex) => {
+    if (buttonIndex === 0) {
+      // 전체보기 버튼일 때는 모든 데이터 반환
+      return data;
+    } else if (buttonIndex === 1) {
+      // 모집중 버튼일 때는 club_open이 true인 데이터만 반환
+      return data.filter(club => club.club_open === true);
+    } else {
+      // 모집마감 버튼일 때는 club_open이 false인 데이터만 반환
+      return data.filter(club => club.club_open === false);
     }
-    return data;
   };
-  const filteredData = getFilteredData();
-  const params = useParams();
+  
+  console.log(`${buttonIndex}버튼 데이터`,filterData(clubData, buttonIndex));
+
   return (
     <>
       <Wrap>
         <PageHeader />
         <MaincontentBox>
           <NowBtnBox>
-            <NowBtn onClick={handleToggle}>
-              {currentButton === 1 
-                ? "전체 보기"
-                : currentButton === 2  && data.some((item) => item.club_open)
-                ? "현재 모집중"
-                : currentButton === 3 && data.some((item) => !item.club_open)
-                ? "모집 마감"
-              : "전체 보기"}
-            </NowBtn>
+            <NowBtn onClick={handleButtonClick}>{buttonStates[buttonIndex]}</NowBtn>
           </NowBtnBox>
           <ItemBox>
-                <MainItems data={filteredData} params={params}/>
+            <MainItems data={filterData(clubData,buttonIndex)} />
           </ItemBox>
         </MaincontentBox>
       </Wrap>

@@ -1,45 +1,42 @@
-import { Link } from "react-router-dom/dist";
 import styled from "styled-components";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useParams } from "react-router-dom";
+import {Link} from "react-router-dom";
+import Loading from "../LoadingSpinner/Loading";
 
-function MainItems({ data, params }) {
-  const [localParams, setLocalParams] = useState(params);
-  const navigate = useNavigate();
-  const handleParams = (club_id) => {
-    setLocalParams((prevParams) => ({
-      ...prevParams,
-      id: club_id,
-    }));
-    navigate(`/main/club_id:${club_id}`);
-    console.log("params.id:", localParams);
-  };
+function MainItems({data}) {
+    if (!data) {
+        return <Loading/>;
+    }
+
   return (
-    <>
-      <Wrapper>
-        {data.map((item) => (
-          <Box key={item.club_id} onClick={() => handleParams(item.club_id)}>
-            <Date>{item.remaining_days}</Date>
-            <SmallInfoBox>
-              <ClubPhotoBox>
-                <img src=".//MainPage/Clubview.png" />
-              </ClubPhotoBox>
-              <ClubInfoBox>
-                <ClubName>
-                  <p>{item.name}</p>
-                </ClubName>
-                <ClubIntro>
-                  <p>{item.description}</p>
-                </ClubIntro>
-              </ClubInfoBox>
-            </SmallInfoBox>
-          </Box>
-        ))}
-      </Wrapper>
-    </>
+      <>
+          {data.map((item,index) => (
+              <Link to={`/main/${item.club_id}`}>
+                  <Wrapper>
+                      <Box key={index}>
+                          <Date>
+                              {item.club_open ? "D- "+item.remaining_days : "모집 마감"}
+                          </Date>
+                          <SmallInfoBox>
+                              <ClubPhotoBox>
+                                  <img src={item.club_pic}/>
+                              </ClubPhotoBox>
+                              <ClubInfoBox>
+                                  <ClubName>
+                                      <p>{item.club_name}</p>
+                                  </ClubName>
+                                  <ClubIntro>
+                                      <p>{item.club_introduction}</p>
+                                  </ClubIntro>
+                              </ClubInfoBox>
+                          </SmallInfoBox>
+                      </Box>
+                  </Wrapper>
+              </Link>
+              ))}
+      </>
   );
 }
+
 
 export default MainItems;
 
@@ -80,6 +77,7 @@ const ClubPhotoBox = styled.div`
   border: 2px solid ${({ theme }) => theme.colors.lightGray};
   display: flex;
   justify-content: center;
+  overflow: hidden;
   img {
     object-fit: cover;
   }
@@ -99,17 +97,11 @@ const ClubName = styled.div`
 `;
 
 const ClubIntro = styled.div`
-  /* display: -webkit-box;
-  -webkit-line-clamp: 2; 
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: normal; */
   p {
     font-size: 15px;
     color: #616161;
     display: -webkit-box;
-    -webkit-line-clamp: 2; /* 표시할 줄 수 */
+    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
