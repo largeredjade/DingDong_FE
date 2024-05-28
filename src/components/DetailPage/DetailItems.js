@@ -5,12 +5,16 @@ import {useDispatch, useSelector} from "react-redux";
 import {selectIsPopupShown, showPopup} from "../../redux/loginPopup";
 import JoinClubPopup from "../Popup/JoinClubPopup";
 import {getCookie} from "../../auth/cookie";
+import Loading from "../LoadingSpinner/Loading";
 
-function DetailItems({clubDetails}) {
+function DetailItems({clubData}) {
   const [showJoinPopup, setShowJoinPopup] = useState(false);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const isShowLoginPopup = useSelector(selectIsPopupShown);
 
+  if (!clubData) {
+    return <Loading/>;
+  }
 
   const handlePopup = () => {
     const userStatus = getCookie('access');
@@ -26,48 +30,46 @@ function DetailItems({clubDetails}) {
 
   return (
       <>
-
-        {clubDetails.map((item) => (
             <Wrapper>
-              <Box key={item.club_id}>
-                <Date>{item.remaining_days}</Date>
+              <Box key={clubData.club_id}>
+                <Date>{clubData.club_open ? "D- "+clubData.remaining_days : "모집 마감"}</Date>
                 <LargeInfoBox>
                   <Intro>
                     <ClubPhotoBox>
-                      <img src=".//MainPage/Clubview.png" />
+                      <img src={clubData.club_pic}/>
                     </ClubPhotoBox>
                     <ClubBox>
                       <ClubName>
-                        <p>{item.club_name}</p>
+                        <p>{clubData.club_name}</p>
                       </ClubName>
                       <ClubMem>
                         <Member>부원</Member>
-                        <Num>{item.club_member}</Num>
+                        <Num>{clubData.member_count}</Num>
                       </ClubMem>
                     </ClubBox>
                   </Intro>
                   <ClubInfo>
                     <ItemBox>
                       <Bold>활동 시간</Bold>
-                      <p>{item.club_time}</p>
+                      <p>{clubData.club_time}</p>
                     </ItemBox>
                     <ItemBox>
                       <Bold>동아리 소개</Bold>
-                      <p>{item.club_introduction}</p>
+                      <p>{clubData.club_introduction}</p>
                     </ItemBox>
                     <ItemBox>
                       <Bold>활동 내용 </Bold>
-                      <p>{item.club_details}</p>
+                      <p>{clubData.club_details}</p>
                     </ItemBox>
                     <ItemBox>
                       <Bold>연락처</Bold>
-                      <p>{item.club_contact}</p>
+                      <p>{clubData.club_contact}</p>
                     </ItemBox>
                   </ClubInfo>
                 </LargeInfoBox>
               </Box>
 
-              {item.remaining_days !== "모집 마감" && (
+              {clubData.club_open !== false && (
                   <JoinBtnBox>
                     <JoinBtn onClick={handlePopup}>가입하기</JoinBtn>
                     {isShowLoginPopup && <LoginPopup />}
@@ -75,7 +77,6 @@ function DetailItems({clubDetails}) {
                   </JoinBtnBox>
               )}
             </Wrapper>
-        ))}
       </>
   );
 }
@@ -86,7 +87,7 @@ const Wrapper = styled.div``;
 
 const Box = styled.div`
   width: 350px;
-  height: 510px;
+  //height: 510px;
   background: #ffffff;
   border: 2px solid #cfe9dc;
   border-radius: 30px;
@@ -132,11 +133,6 @@ const ClubPhotoBox = styled.div`
   }
 `;
 
-// const ClubPhoto = styled.div`
-//     width: 91px;
-//     height: 91px;
-//     border-radius: 45.5px;
-// `
 
 const ClubBox = styled.div`
   display: grid;
