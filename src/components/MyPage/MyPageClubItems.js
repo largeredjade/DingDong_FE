@@ -102,5 +102,5 @@ const LogoutBtn = styled.button`
     width: 220px;
     height: 51px;
     border-radius: 20px;
-    background: ${({theme})=>theme.backgroundColor.mainColorDark};;
+    background: ${({theme})=>theme.backgroundColor.mainColorDark};
 `;

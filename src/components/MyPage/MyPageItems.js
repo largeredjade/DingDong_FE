@@ -5,7 +5,7 @@ import {Link, useLocation, useNavigate} from "react-router-dom";
 
 function MyPageItems({data}) {
     const [isShowQr, setIsShowQr] =useState(false)
-    
+
     const handleQrPopup = ()=>{
         setIsShowQr(!isShowQr)
     }
@@ -14,11 +14,12 @@ function MyPageItems({data}) {
     return (
         <>  
             {isShowQr && <QrPopup onChange={handleQrPopup} qr_code={"https://www.notion.so/hufsglobal/HUFS-12-e23a2e85170c4dca85a689949b424309"}/>}
+            {isShowQr && <QrPopup onChange={handleQrPopup} qr_code={"https://www.notion.so/hufsglobal/HUFS-12-e23a2e85170c4dca85a689949b424309"}/>}
             {data&&(
                 <Wrapper key={data.user_id}>
                     <ItemBox>
                         <InfoClub>{data.name}의 동아리 {data.registered_clubs.map((i)=>(
-                        <span>{i.name}</span>
+                            <span>{i.name}</span>
                         ))}
                         </InfoClub>
                     </ItemBox>
@@ -31,7 +32,7 @@ function MyPageItems({data}) {
                         </BtnModify>
                     </BtnItemBox>
                 </Wrapper>)}
-            
+
         </>
 
     );
