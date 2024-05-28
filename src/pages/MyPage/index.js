@@ -1,21 +1,64 @@
+import React, { useEffect, useState, use } from 'react';
 import PageHeader from "../../components/PageHeader/PageHeader";
-import MyPageItemes from "../../components/MyPage/MyPageItems";
+import MyPageItems from "../../components/MyPage/MyPageItems";
 import MyPageClubItems from "../../components/MyPage/MyPageClubItems";
 import styled from "styled-components";
-import manager_user from "../../mockdata/mypage/manager_user.json"
+import { getCookie } from "../../auth/cookie";
+import { useParams } from "react-router-dom";
+import axiosInstance from "../../lib/axios";
 
 function MyPage() {
-    const user_data = [manager_user];
+
+    const params = useParams();
+    const user_id = getCookie('user_id');
+    const club_id = getCookie('club_id');
+    const access_token = getCookie('access');
+    const [data, setUserData] = useState();
+    const [data1, setClubData] = useState();
+    
+    async function handleSubmit() {
+        try {
+            const response = await axiosInstance.get(`/mypage/${user_id}/`, {
+                headers: {
+                    Authorization: `Bearer ${access_token}`
+                }
+            });
+            console.log(response);
+            setUserData(response.data);
+        } catch (error) {
+            console.error("API call error:", error);
+        }
+    }
+    async function handleSubmit2() {
+        try {
+            const response = await axiosInstance.post(`/mypage/${club_id}/`, {
+                headers: {
+                    Authorization: `Bearer ${access_token}`
+                }
+            });
+            console.log(response);
+            setClubData(response.data);
+        } catch (error) {
+            console.error("API call error:", error);
+        }
+    }
+    
+    useEffect(() => {
+        handleSubmit();
+        handleSubmit2();
+    }, []);
+
+
     return (
-        <>  <Wrap>
-               <PageHeader/>
+        <>
+            <Wrap>
+                <PageHeader/>
                 <ItemBox>
-                    <MyPageItemes data={user_data}/>
+                    <MyPageItems data={data} data1={data1} params={params} />
                 </ItemBox>
-                <MyPageClubItems data={user_data}/>
+                <MyPageClubItems data={data} params={params}/>
             </Wrap>
         </>
-
     );
 }
 

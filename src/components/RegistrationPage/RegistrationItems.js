@@ -5,6 +5,7 @@ import {useEffect, useMemo, useRef, useState} from "react";
 import moment from "moment";
 
 function RegistrationItems() {
+
     const fileInput = useRef(null);
     const [imgFile, setImgFile] = useState(null);
     const [isOpen1, setIsOpen1] = useState(false);
@@ -230,7 +231,6 @@ const WriteInput = styled.input`
         border: 2px solid ${({theme})=> theme.colors.mainColorDark};
     }
 `;
-
 
 const RegstrationBtnBox = styled.div`
     display: flex;

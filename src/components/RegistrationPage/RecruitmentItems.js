@@ -105,116 +105,117 @@ const RecruitmentItems = ({
                 </>
             )}
         </>
-    );
+      
+  );
 };
 
 export default RecruitmentItems;
 
 const CalendarContainer = styled.div`
-    position: relative;
+  position: relative;
 `;
 const CheckboxWrapper = styled.div`
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    padding-bottom: 10px;
-    padding-top: 5px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  padding-bottom: 10px;
+  padding-top: 5px;
 `;
 const Label = styled.label`
-    font-size: 18px;
-    padding: 5px;
-    font-weight: bold;
+  font-size: 18px;
+  padding: 5px;
+  font-weight: bold;
 `;
 const DropdownButton = styled.button`
-    display: flex;
-    align-items: start;
-    padding: 15px;
-    font-size: 15px;
-    margin: 10px 10px 20px 10px;
-    width: 294px;
-    height: 51px;
-    border-radius: 20px;
-    border: 2px solid #b7b7b7;
-    color: #000000;
-    outline: none;
-    &:hover {
-        border: 2px solid ${({ theme }) => theme.colors.mainColorDark};
-    }
+  display: flex;
+  align-items: start;
+  padding: 15px;
+  font-size: 15px;
+  margin: 10px 10px 20px 10px;
+  width: 294px;
+  height: 51px;
+  border-radius: 20px;
+  border: 2px solid #b7b7b7;
+  color: #000000;
+  outline: none;
+  &:hover {
+    border: 2px solid ${({ theme }) => theme.colors.mainColorDark};
+  }
 `;
 const ItemBox = styled.div`
-    color: ${({ theme }) => theme.colors.darkGray};
+  color: ${({ theme }) => theme.colors.darkGray};
 `;
 const RecruitInfo = styled.div`
-    font-size: 20px;
-    font-weight: bold;
-    padding-left: 10px;
-    padding: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  padding-left: 10px;
+  padding: 10px;
 `;
 const ButtonWithImageContainer = styled.div`
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 `;
 
 const ImgLocation = styled.div`
-    margin-top: -5px;
-    padding-left: 145px;
+  margin-top: -5px;
+  padding-left: 145px;
 `;
 const CalendarWrapper = styled.div`
-    z-index: 999;
-    position: absolute;
-    top: 50%;
-    left: 0;
-    display: ${(props) => (props.isOpen ? "block" : "none")};
+  z-index: 999;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  display: ${(props) => (props.isOpen ? "block" : "none")};
 `;
 
 const StyledCalendar = styled(Calendar)`
-    max-width: 328px;
-    margin: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    overflow: hidden;
-    background: #ffffff;
+  max-width: 328px;
+  margin: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #ffffff;
 
-    .react-calendar__navigation {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 10px;
-        background: ${({ theme }) => theme.backgroundColor.mainColor};
-        span {
-            font-size: 15px;
-            color: #419f70;
-        }
+  .react-calendar__navigation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    background: ${({ theme }) => theme.backgroundColor.mainColor};
+    span {
+      font-size: 15px;
+      color: #419f70;
     }
-    .react-calendar__navigation__label {
-        flex-grow: 0 !important;
-    }
-    .react-calendar__month-view__weekdays {
-        text-align: center;
-        font-size: 12px;
-        background: #eee;
-        padding: 10px 0px 10px 0px;
-    }
-    .react-calendar__month-view__weekdays__weekday {
-        color: #419f70;
-        font-size: 12px;
-    }
-    .react-calendar__month-view__weekdays__weekday--weekend abbr[title="일요일"] {
-        color: #ff0000;
-    }
-    .react-calendar__month-view__weekdays__weekday--weekend abbr[title="토요일"] {
-        color: #000aff;
-    }
-    .react-calendar__tile {
-        text-align: center;
-        padding: 15px;
-    }
-    .react-calendar__tile:enabled:hover {
-        background: #eee;
-        border-radius: 25px;
-    }
-    .react-calendar__tile:enabled:focus,
-    .react-calendar__tile--active {
-        border: 1px solid ${({ theme }) => theme.backgroundColor.mainColor};
-        border-radius: 25px;
-    }
+  }
+  .react-calendar__navigation__label {
+    flex-grow: 0 !important;
+  }
+  .react-calendar__month-view__weekdays {
+    text-align: center;
+    font-size: 12px;
+    background: #eee;
+    padding: 10px 0px 10px 0px;
+  }
+  .react-calendar__month-view__weekdays__weekday {
+    color: #419f70;
+    font-size: 12px;
+  }
+  .react-calendar__month-view__weekdays__weekday--weekend abbr[title="일요일"] {
+    color: #ff0000;
+  }
+  .react-calendar__month-view__weekdays__weekday--weekend abbr[title="토요일"] {
+    color: #000aff;
+  }
+  .react-calendar__tile {
+    text-align: center;
+    padding: 15px;
+  }
+  .react-calendar__tile:enabled:hover {
+    background: #eee;
+    border-radius: 25px;
+  }
+  .react-calendar__tile:enabled:focus,
+  .react-calendar__tile--active {
+    border: 1px solid ${({ theme }) => theme.backgroundColor.mainColor};
+    border-radius: 25px;
+  }
 `;
