@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import {useState} from "react";
 import QrPopup from "../Popup/QrPopup";
-import {Link, useLocation} from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 
 function MyPageItems({data}) {
     const [isShowQr, setIsShowQr] =useState(false)
-
+    
     const handleQrPopup = ()=>{
         setIsShowQr(!isShowQr)
     }
@@ -14,10 +14,10 @@ function MyPageItems({data}) {
     return (
         <>  
             {isShowQr && <QrPopup onChange={handleQrPopup} qr_code={"https://www.notion.so/hufsglobal/HUFS-12-e23a2e85170c4dca85a689949b424309"}/>}
-            {data.map((item)=>(
-                <Wrapper key={item.user_id}>
+            {data&&(
+                <Wrapper key={data.user_id}>
                     <ItemBox>
-                        <InfoClub>{item.name}의 동아리 {item.register_clubs.map((i)=>(
+                        <InfoClub>{data.name}의 동아리 {data.registered_clubs.map((i)=>(
                         <span>{i.name}</span>
                         ))}
                         </InfoClub>
@@ -25,13 +25,13 @@ function MyPageItems({data}) {
                     <BtnItemBox>
                         <BtnQR onClick={handleQrPopup}><p>출석 QR<br/>생성하기</p></BtnQR>
                         <BtnModify>
-                            <Link to={'/mypage/clubedit'} selected={currentPath === '/mypage/clubedit'}>
+                            <Link to={`/mypage/clubedit/${data.user_id}`}>
                                 <p>동아리 정보</p><p>수정하기</p>
                             </Link>
                         </BtnModify>
                     </BtnItemBox>
-                </Wrapper>
-            ))}
+                </Wrapper>)}
+            
         </>
 
     );

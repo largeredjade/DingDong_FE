@@ -8,6 +8,7 @@ import axiosInstance from "../../lib/axios";
 import {getCookie} from "../../auth/cookie";
 
 function RegistrationItems() {
+
     const fileInput = useRef(null);
     const [imgFile, setImgFile] = useState(null);
     const [isOpen1, setIsOpen1] = useState(false);
@@ -342,7 +343,6 @@ const WriteInput = styled.input`
         border: 2px solid ${({theme})=> theme.colors.mainColorDark};
     }
 `;
-
 
 const RegstrationBtnBox = styled.div`
     display: flex;

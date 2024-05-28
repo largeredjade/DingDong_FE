@@ -1,9 +1,27 @@
-import {Link, useNavigate} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import styled from "styled-components";
+import { useState, useEffect } from "react";
 import {removeCookie} from "../../auth/cookie";
 
-function MyPageClubItems({data}) {
+function MyPageClubItems({data,params}) {
     const navigate = useNavigate()
+    const [localParams, setLocalParams] = useState(params);
+    console.log(data);
+    useEffect(() => {
+    if (localParams.id) {
+      navigate(`/mypage/joinclub/${localParams.id}`);
+      console.log("params.id:", localParams);
+    }
+  }, [localParams, navigate]);
+
+  const handleParams = (club_id) => {
+    setLocalParams((prevParams) => ({
+      ...prevParams,
+      id: club_id,
+    }));
+  };
+
+
     const handleLogout = ()=>{
         removeCookie('access')
         navigate('/main')
@@ -11,24 +29,27 @@ function MyPageClubItems({data}) {
     }
     return (
         <>
-            {data.map((item)=>(
-                <Wrapper key={item.user_id}>
+            {data&&(
+                <Wrapper key={data.user_id}>
                     <ItemBox>
                         <RegisterInfo>내가 가입한 동아리</RegisterInfo>
                     </ItemBox>
                     <ClubBtnBox>
-                        {item.register_clubs.map((i)=>(
-                        <ClubLink to={'/mypage/joinclub'}>{i.name}</ClubLink>
+                        {data.registered_clubs.map((i)=>(
+                        <ClubLink  key={i.club_id}  onClick={() => handleParams(i.club_id)}>
+                            {i.name}
+                        </ClubLink>
                         ))}
-                        {item.joined_clubs.map((i)=>(
-                        <ClubLink to={'/mypage/joinclub'}>{i.name}</ClubLink>
+                        {data.joined_clubs.map((i)=>(
+                        <ClubLink key={i.club_id}  onClick={() => handleParams(i.club_id)}>
+                            {i.name}
+                        </ClubLink>
                         ))}
                     </ClubBtnBox>
                     <LogoutBtnBox>
                         <LogoutBtn onClick={handleLogout}>로그아웃</LogoutBtn>
                     </LogoutBtnBox>
-                </Wrapper>
-            ))}
+                </Wrapper>)}
         </>
 
     );

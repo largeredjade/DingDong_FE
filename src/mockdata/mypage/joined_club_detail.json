@@ -1,14 +1,11 @@
 {
-  "club_id": "1",
-  "club_name": "Club A",
-  "attendance": [
-    {
-      "date": "2024-05-10",
-      "status": "Present"
-    },
-    {
-      "date": "2024-05-09",
-      "status": "Absent"
-    }
-  ]
-}
+    "status": "success",
+    "attendance": [
+        {
+            "club_id": 8,
+            "username": "김나연",
+            "date": "2024-05-22",
+            "status": "Present"
+        }
+    ]
+} 
