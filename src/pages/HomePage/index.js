@@ -1,11 +1,9 @@
 import styled from "styled-components";
 import {Logo} from "../../components/Icons/logos";
 import {Link} from "react-router-dom";
-import GoToTestBtn from "../../components/HomePage/GoToTestBtn";
 function HomePage() {
     return (
         <>
-            <GoToTestBtn/>
             <Link to={'/main'}>
                 <DomWrap>
                     <ItemWrapper>
