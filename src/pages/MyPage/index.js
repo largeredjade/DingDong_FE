@@ -3,6 +3,7 @@ import PageHeader from "../../components/PageHeader/PageHeader";
 import MyPageItems from "../../components/MyPage/MyPageItems";
 import MyPageClubItems from "../../components/MyPage/MyPageClubItems";
 import styled from "styled-components";
+
 import { getCookie } from "../../auth/cookie";
 import { useParams } from "react-router-dom";
 import axiosInstance from "../../lib/axios";
@@ -47,6 +48,7 @@ function MyPage() {
         handleSubmit();
         handleSubmit2();
     }, []);
+
 
 
     return (

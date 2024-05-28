@@ -13,7 +13,8 @@ const RecruitmentItems = ({
                               handleToggleCalendar2,
                               handleDateChange1,
                               handleDateChange2,
-                              handleRecruitmentStatusChange
+                              handleRecruitmentStatusChange,
+                              isChecked
                           }) => {
     return (
         <>
@@ -21,15 +22,17 @@ const RecruitmentItems = ({
                 <RecruitInfo>모집 여부</RecruitInfo>
                 <CheckboxWrapper>
                     <input
-                        type="checkbox"
+                        type="radio"
+                        name="recruitment"
                         checked={recruitmentStatus}
-                        onChange={handleRecruitmentStatusChange}
+                        onChange={() => handleRecruitmentStatusChange(true)}
                     />
                     <Label>예</Label>
                     <input
-                        type="checkbox"
+                        type="radio"
+                        name="recruitment"
                         checked={!recruitmentStatus}
-                        onChange={handleRecruitmentStatusChange}
+                        onChange={() => handleRecruitmentStatusChange(false)}
                     />
                     <Label>아니요</Label>
                 </CheckboxWrapper>
@@ -53,7 +56,10 @@ const RecruitmentItems = ({
                             </DropdownButton>
                             <CalendarWrapper isOpen={isOpen1}>
                                 <StyledCalendar
-                                    onChange={handleDateChange1}
+                                    onChange={(date) => {
+                                        handleDateChange1(date);
+                                        handleToggleCalendar1(); // 달력 닫기
+                                    }}
                                     value={new Date(date1)} // moment를 사용하여 Date 객체로 변환
                                     view="month"
                                     next2Label={null}
@@ -86,7 +92,10 @@ const RecruitmentItems = ({
                             </DropdownButton>
                             <CalendarWrapper isOpen={isOpen2}>
                                 <StyledCalendar
-                                    onChange={handleDateChange2}
+                                    onChange={(date) => {
+                                        handleDateChange2(date);
+                                        handleToggleCalendar2(); // 달력 닫기
+                                    }}
                                     value={new Date(date2)} // moment를 사용하여 Date 객체로 변환
                                     view="month"
                                     next2Label={null}
