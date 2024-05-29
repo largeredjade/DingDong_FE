@@ -36,6 +36,7 @@ function MyPage() {
         }
         getSubmit();
     }, []);
+    const hasScannedToday = data?.registered_clubs?.some(club => club.has_scanned_today);
 
 
     return (
@@ -48,8 +49,8 @@ function MyPage() {
                             <ItemBox>
                                 <MyPageItems data={data} params={params} />
                             </ItemBox>
-                            {data?.registered_clubs &&(
-                                <AttendanceCheck registered_clubs={data.registered_clubs}/>
+                            {data?.registered_clubs.length > 0 && (
+                                <AttendanceCheck registered_clubs={data.registered_clubs} joined_clubs={data.joined_clubs}/>
                             )}
                             <MyPageClubItems data={data} params={params}/>
                         </>
