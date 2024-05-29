@@ -1,17 +1,43 @@
 import React, { useState } from "react";
 import QrScanner from "react-qr-scanner";
 import styled from "styled-components";
+import axiosInstance from '../../lib/axios'
+import {getCookie} from "../../auth/cookie";
 
-
-const QrScanPopup = () => {
+const QrScanPopup = ({data, data1}) => {
+    const accessToken = getCookie('access');
     const [scannedText, setScannedText] = useState("");
     const [isOpen, setIsOpen] = useState(true);
+    const [showQrScan, setShowQrScan] = useState(false);
+    async function handleQrScan() {
+        setShowQrScan(!showQrScan);
+        if (!showQrScan) {
+            try {
+                const response = await axiosInstance.post(`/mypage/clubs/${data}/scan_qr/${data1}/`, {
+                    ...scannedText
+                }, {
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`
+                    }
+                });
+                console.log(response);
+                setScannedText(response.data);
+                console.log('출석 정보 전송 응답:', response);
+            } catch (error) {
+                console.error("출석 정보 전송 오류:", error);
+            }
+        }
+    }
+
 
     const handleScan = (data) => {
         if (data) {
-            setScannedText(data.text);
-            console.log('scannedText::::',scannedText);
-            setIsOpen(false)
+            const scannedURL = data.text;
+            setScannedText(scannedURL);
+            console.log('scannedText::::', scannedURL);
+            setIsOpen(false);
+            handleQrScan();
+
 
         }
     };
@@ -24,13 +50,13 @@ const QrScanPopup = () => {
         <>
             {isOpen &&
                 <Wrapper>
-                <QrScanner
-                    onScan={handleScan}
-                    onError={handleError}
-                    style={{ width: "100%", height: "100%" }}
-                />
-                <p>{scannedText}</p>
-            </Wrapper>}
+                    <QrScanner
+                        onScan={handleScan}
+                        onError={handleError}
+                        style={{ width: "100%", height: "100%" }}
+                    />
+                    <p>{scannedText}</p>
+                </Wrapper>}
         </>
 
     );
