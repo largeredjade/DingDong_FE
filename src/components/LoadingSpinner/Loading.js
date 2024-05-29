@@ -24,7 +24,7 @@ function Loading() {
 export default Loading;
 
 const Wrapper = styled.div`
-    margin-top: 200px;
+    margin-top: 250px;
     width: 100%;
     height: 100%;
     font-size: 20px;
