@@ -164,8 +164,6 @@ function EditRegistrationItems() {
             formData.append("club_pic", values.club_pic);
         }
 
-
-
         try {
                 console.log(values.club_pic);
                 const response = await axiosInstance.put(`/clubs/${params.id}/update/`, formData,{
@@ -179,8 +177,6 @@ function EditRegistrationItems() {
             } catch (error) {
                 console.log("error:", error);
             }
-
-
     }
 
 
