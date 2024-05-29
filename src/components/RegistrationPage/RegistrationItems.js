@@ -146,7 +146,6 @@ function RegistrationItems() {
                 } catch (error) {
                     console.log("error:", error);
                 }
-
         }
     }
 
@@ -179,17 +178,17 @@ function RegistrationItems() {
                         <p>동아리 이름</p>
                         <WriteInput
                             id={"club_name"}
-                            name={"club_code"}
-                            value={values.club_code}
+                            name={"club_name"}
+                            value={values.club_name}
                             onChange={handleInputChange}
                             placeholder={'우리 동아리 이름을 입력해 주세요'}/>
                     </ItemBox>
                     <ItemBox>
                         <p>동아리 가입 코드</p>
                         <WriteInput
-                            id={"club_name"}
-                            name={"club_name"}
-                            value={values.club_name}
+                            id={"club_code"}
+                            name={"club_code"}
+                            value={values.club_code}
                             onChange={handleInputChange}
                             placeholder={'숫자를 입력해 주세요.'}/>
                     </ItemBox>
