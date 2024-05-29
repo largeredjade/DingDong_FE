@@ -13,7 +13,7 @@ function MyPageItems({data}) {
     const currentPath = location.pathname;
     return (
         <>  
-            {isShowQr && <QrPopup onChange={handleQrPopup} qr_code={"https://www.notion.so/hufsglobal/HUFS-12-e23a2e85170c4dca85a689949b424309"}/>}
+            {isShowQr && <QrPopup onChange={handleQrPopup} qr_code={data.registered_clubs[0].qr_id}/>}
             {data&&(
                 <Wrapper key={data.user_id}>
                     <ItemBox>
@@ -30,8 +30,8 @@ function MyPageItems({data}) {
                             </Link>
                         </BtnModify>
                     </BtnItemBox>
-                </Wrapper>)}
-
+                </Wrapper>
+            )}
         </>
 
     );

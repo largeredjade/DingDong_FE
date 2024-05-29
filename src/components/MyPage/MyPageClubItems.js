@@ -1,6 +1,5 @@
 import {Link, useNavigate, useParams} from "react-router-dom";
 import styled from "styled-components";
-import { useState, useEffect } from "react";
 import {removeCookie} from "../../auth/cookie";
 import {getCookie} from "../../auth/cookie";
 import axiosInstance from '../../lib/axios';
@@ -14,7 +13,7 @@ function MyPageClubItems({data}) {
         removeCookie('access')
         navigate('/main')
     }
-    
+
     async function handleDelete (){
         try{
             const response = await axiosInstance.delete(`/clubs/${data.registered_clubs[0].club_id}/delete/`, {
@@ -47,7 +46,7 @@ function MyPageClubItems({data}) {
                         <LogoutBtn onClick={handleLogout}>로그아웃</LogoutBtn>
                         <p>정말 동아리 폐지를 원하시나요?</p>
                         <DeleteBtn onClick={handleDelete}>동아리 폐지하기</DeleteBtn>
-                    </LogoutBtnBox>   
+                    </LogoutBtnBox>
                 </Wrapper>
             )}
         </>
