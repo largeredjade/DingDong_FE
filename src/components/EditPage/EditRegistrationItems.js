@@ -156,12 +156,17 @@ function EditRegistrationItems() {
             for (const key in values) {
                 formData.append(key, values[key]);
             }
-            if (imgFile) {
-                formData.append("club_pic", imgFile.file);
-            }
+        // 이미지를 수정한 경우에만 새로운 이미지를 추가
+        if (imgFile && imgFile.file) {
+            formData.append("club_pic", imgFile.file);
+        } else {
+            // 이미지를 수정하지 않은 경우에는 이전 이미지 값을 유지
+            formData.append("club_pic", values.club_pic);
+        }
 
 
-            try {
+
+        try {
                 console.log(values.club_pic);
                 const response = await axiosInstance.put(`/clubs/${params.id}/update/`, formData,{
                     headers: {
@@ -207,17 +212,17 @@ function EditRegistrationItems() {
                         <p>동아리 이름</p>
                         <WriteInput
                             id={"club_name"}
-                            name={"club_code"}
-                            value={values.club_code}
+                            name={"club_name"}
+                            value={values.club_name}
                             onChange={handleInputChange}
                             placeholder={'우리 동아리 이름을 입력해 주세요'}/>
                     </ItemBox>
                     <ItemBox>
                         <p>동아리 가입 코드</p>
                         <WriteInput
-                            id={"club_name"}
-                            name={"club_name"}
-                            value={values.club_name}
+                            id={"club_code"}
+                            name={"club_code"}
+                            value={values.club_code}
                             onChange={handleInputChange}
                             placeholder={'숫자를 입력해 주세요.'}/>
                     </ItemBox>
