@@ -36,7 +36,7 @@ function DetailItems({clubData}) {
                 <LargeInfoBox>
                   <Intro>
                     <ClubPhotoBox>
-                      <img src={clubData.club_pic}/>
+                      <ClubPhoto src={clubData.club_pic}/>
                     </ClubPhotoBox>
                     <ClubBox>
                       <ClubName>
@@ -73,7 +73,7 @@ function DetailItems({clubData}) {
                   <JoinBtnBox>
                     <JoinBtn onClick={handlePopup}>가입하기</JoinBtn>
                     {isShowLoginPopup && <LoginPopup />}
-                    {showJoinPopup && <JoinClubPopup/>}
+                    {showJoinPopup && <JoinClubPopup club_id={clubData.club_id}/>}
                   </JoinBtnBox>
               )}
             </Wrapper>
@@ -128,10 +128,12 @@ const ClubPhotoBox = styled.div`
   border: 2px solid ${({ theme }) => theme.colors.lightGray};
   display: flex;
   justify-content: center;
-  img {
-    object-fit: cover;
-  }
+  overflow: hidden;
 `;
+
+const ClubPhoto = styled.img`
+  object-fit: cover;
+`
 
 
 const ClubBox = styled.div`
