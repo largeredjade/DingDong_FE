@@ -23,7 +23,7 @@ function App() {
                   <Route path={"/login"} element={<LoginPage/>}/>
                   <Route path={"/join"} element={<JoinPage/>}/>
                   <Route path={"/mypage"} element={<MyPage/>}/>
-                  <Route path={"/mypage/joinclub/:club_id"} element={<MyPageJoinClub/>}/>
+                  <Route path={"/mypage/joinclub/:club_id/:qr_id"} element={<MyPageJoinClub/>}/>
                   <Route path={"/registration"} element={<RegistrationPage/>}/>
                   <Route path={`/main/:id`} element={<DetailPage/>}/>
                   <Route path={`/mypage/clubedit/:id`} element={<EditClubPage/>}/>

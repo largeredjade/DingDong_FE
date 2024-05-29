@@ -14,7 +14,6 @@ function MyPageItems({data}) {
     return (
         <>  
             {isShowQr && <QrPopup onChange={handleQrPopup} qr_code={"https://www.notion.so/hufsglobal/HUFS-12-e23a2e85170c4dca85a689949b424309"}/>}
-            {isShowQr && <QrPopup onChange={handleQrPopup} qr_code={"https://www.notion.so/hufsglobal/HUFS-12-e23a2e85170c4dca85a689949b424309"}/>}
             {data&&(
                 <Wrapper key={data.user_id}>
                     <ItemBox>

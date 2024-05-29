@@ -4,17 +4,17 @@ import Calendar from "react-calendar";
 import moment from "moment";
 import JoinClubDetail from '../../mockdata/mypage/joined_club_detail.json';
 
-const CustomCalendar = () => {
+const CustomCalendar = ({data1}) => {
     const today = new Date();
     const [date, setDate] = useState(today);
     const [attendDay, setAttendDay] = useState([]);
 
     useEffect(() => {
-        if (JoinClubDetail && Array.isArray(JoinClubDetail.attendance)) {
-            const attendedDates = JoinClubDetail.attendance.filter(item => item.status === "Present").map(item => item.date);
+        if (data1 && Array.isArray(data1.attendance_list)) {
+            const attendedDates = data1.attendance_list.filter(item => item.status === "Present").map(item => item.date);
             setAttendDay(attendedDates);
         }
-    }, [JoinClubDetail, setAttendDay]);
+    }, [data1, setAttendDay]);
 
     const handleDateChange = (newDate) => {
         setDate(newDate);
@@ -37,11 +37,11 @@ const CustomCalendar = () => {
                 formatYear={(locale, date) => moment(date).format("YYYY")}
                 formatMonthYear={(locale, date) => moment(date).format("YYYY. MM")}
                 tileContent={({date}) => {
-                    const attendedDates = JoinClubDetail.attendance
+                    const attendedDates = data1.attendance_list
                     .filter(item => item.status === "Present")
                     .map(item => moment(item.date).format("YYYY-MM-DD"));
                     const isAttend = attendedDates.includes(moment(date).format("YYYY-MM-DD"));
-                    const isAbsent = JoinClubDetail.attendance
+                    const isAbsent = data1.attendance_list
                         .find(item => moment(item.date).format("YYYY-MM-DD") === moment(date).format("YYYY-MM-DD") && item.status === "Absent");
 
                     if (isAttend) {

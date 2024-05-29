@@ -20,18 +20,6 @@ function TestPage() {
     // json.에서 불러온 데이터 새로운 변수에 저장
     const data = allclubs.clubs;
 
-    console.log(data);
-    const user_data = [manager_user];
-    console.log(user_data)
-
-    //동적 라우팅
-    const params = useParams();
-    const user_id = getCookie('user_id')
-    const access_token = getCookie('access')
-
-
-    const user_data = manager_user;
-    console.log(user_data);
 
     // 동적 라우팅
     const params = useParams();
