@@ -3,12 +3,12 @@ import styled from "styled-components";
 import {removeCookie} from "../../auth/cookie";
 import {getCookie} from "../../auth/cookie";
 import axiosInstance from '../../lib/axios';
+import {useEffect, useState} from "react";
 
 function MyPageClubItems({data}) {
     const navigate = useNavigate();
     const accessToken = getCookie('access');
-    console.log(data);
-    console.log(data.registered_clubs[0]);
+
     const handleLogout = ()=>{
         removeCookie('access')
         navigate('/main')
@@ -22,11 +22,15 @@ function MyPageClubItems({data}) {
                 }
             });
             console.log('삭제 response:::',response);
+            navigate('/mypage')
+
         }catch (error){
             console.error("API call error:", error);
 
         }
     }
+
+
 
     return (
         <>
