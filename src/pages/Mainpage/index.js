@@ -3,6 +3,8 @@ import MainItems from "../../components/MainPage/MainItems";
 import styled from "styled-components";
 import React, {useEffect, useState} from "react";
 import axiosInstance from "../../lib/axios";
+import Loading from "../../components/LoadingSpinner/Loading";
+import data from "bootstrap/js/src/dom/data";
 
 
 function MainPage() {
@@ -44,18 +46,22 @@ function MainPage() {
   
   console.log(`${buttonIndex}버튼 데이터`,filterData(clubData, buttonIndex));
 
+
   return (
     <>
       <Wrap>
         <PageHeader />
-        <MaincontentBox>
-          <NowBtnBox>
-            <NowBtn onClick={handleButtonClick}>{buttonStates[buttonIndex]}</NowBtn>
-          </NowBtnBox>
-          <ItemBox>
-            <MainItems data={filterData(clubData,buttonIndex)} />
-          </ItemBox>
-        </MaincontentBox>
+        {clubData? (
+            <MaincontentBox>
+              <NowBtnBox>
+                <NowBtn onClick={handleButtonClick}>{buttonStates[buttonIndex]}</NowBtn>
+              </NowBtnBox>
+              <ItemBox>
+                <MainItems data={filterData(clubData,buttonIndex)} />
+              </ItemBox>
+            </MaincontentBox>
+        ):(<Loading/>)}
+
       </Wrap>
     </>
   );
