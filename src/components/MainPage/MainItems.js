@@ -3,16 +3,13 @@ import {Link} from "react-router-dom";
 import Loading from "../LoadingSpinner/Loading";
 
 function MainItems({data}) {
-    if (!data) {
-        return <Loading/>;
-    }
 
   return (
       <>
-          {data.map((item,index) => (
+          {data.map((item) => (
               <Link to={`/main/${item.club_id}`}>
                   <Wrapper>
-                      <Box key={index}>
+                      <Box>
                           <Date>
                               {item.club_open ? "D- "+item.remaining_days : "모집 마감"}
                           </Date>
