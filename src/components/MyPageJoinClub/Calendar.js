@@ -4,17 +4,18 @@ import Calendar from "react-calendar";
 import moment from "moment";
 import JoinClubDetail from '../../mockdata/mypage/joined_club_detail.json';
 
-const CustomCalendar = ({data1}) => {
+const CustomCalendar = ({data}) => {
     const today = new Date();
     const [date, setDate] = useState(today);
     const [attendDay, setAttendDay] = useState([]);
+    console.log(data)
 
     useEffect(() => {
-        if (data1 && Array.isArray(data1.attendance_list)) {
-            const attendedDates = data1.attendance_list.filter(item => item.status === "Present").map(item => item.date);
+        if (data && Array.isArray(data.attendance)) {
+            const attendedDates = data.attendance.filter(item => item.status === "Present").map(item => item.date);
             setAttendDay(attendedDates);
         }
-    }, [data1, setAttendDay]);
+    }, [data, setAttendDay]);
 
     const handleDateChange = (newDate) => {
         setDate(newDate);
@@ -37,11 +38,13 @@ const CustomCalendar = ({data1}) => {
                 formatYear={(locale, date) => moment(date).format("YYYY")}
                 formatMonthYear={(locale, date) => moment(date).format("YYYY. MM")}
                 tileContent={({date}) => {
-                    const attendedDates = data1.attendance_list
-                    .filter(item => item.status === "Present")
-                    .map(item => moment(item.date).format("YYYY-MM-DD"));
+                    const attendanceList = Array.isArray(data?.attendance) ? data.attendance : [];
+
+                    const attendedDates = attendanceList
+                        .filter(item => item.status === "Present")
+                        .map(item => moment(item.date).format("YYYY-MM-DD"));
                     const isAttend = attendedDates.includes(moment(date).format("YYYY-MM-DD"));
-                    const isAbsent = data1.attendance_list
+                    const isAbsent = attendanceList
                         .find(item => moment(item.date).format("YYYY-MM-DD") === moment(date).format("YYYY-MM-DD") && item.status === "Absent");
 
                     if (isAttend) {
@@ -59,7 +62,7 @@ const CustomCalendar = ({data1}) => {
                     } else {
                         return null; // 아무런 표시 없음
                     }
-            }}
+                }}
             />
         </CalendarWrapper>
     );
@@ -96,13 +99,13 @@ const StyledCalendar = styled(Calendar)`
         padding: 10px;
         background: ${({theme}) => theme.backgroundColor.mainColor};
         span {
-          font-size: 15px;
-          color: #419F70;
+            font-size: 15px;
+            color: #419F70;
         }
     }
     .react-calendar__navigation__label {
         flex-grow: 0 !important;
-      }
+    }
     .react-calendar__month-view__weekdays {
         text-align: center;
         font-size: 12px;
@@ -112,7 +115,7 @@ const StyledCalendar = styled(Calendar)`
     .react-calendar__month-view__weekdays__weekday {
         color: #419F70;
         font-size: 12px;
-    }  
+    }
     .react-calendar__month-view__weekdays__weekday--weekend abbr[title="일요일"] {
         color: #FF0000;
     }
@@ -131,7 +134,7 @@ const StyledCalendar = styled(Calendar)`
     .react-calendar__tile--active {
         border: 1px solid ${({theme}) => theme.backgroundColor.mainColor};
         border-radius: 25px;
-    }  
+    }
     .react-calendar__tile--now,
     .react-calendar__tile--now:enabled:hover,
     .react-calendar__tile--now:enabled:focus {
