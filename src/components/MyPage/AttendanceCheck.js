@@ -1,48 +1,104 @@
 import Table from 'react-bootstrap/Table';
 import styled from "styled-components";
+import {useEffect, useState} from "react";
 
-function AttendanceCheck({registered_clubs}) {
+function AttendanceCheck({registered_clubs, joined_clubs}) {
+    const [currentDate, setCurrentDate] = useState('');
+
+    useEffect(() => {
+        const date = new Date();
+        const formattedDate = date.toLocaleDateString('ko-KR', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+        setCurrentDate(formattedDate);
+    }, []);
 
     return (
-        <Wrapper>
-            <ItemBox>
-                <CheckDay>YYYY년 MM월 DD일 출석 확인</CheckDay>
-                <TableWrapper>
-                    <StyledTable striped bordered hover>
-                        <thead>
-                        <tr>
-                            <th>인원</th>
-                            <th>학번</th>
-                            <th>이름</th>
-                            <th>출석</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {registered_clubs.map((club) => (
-                            <>
-                                {club.scanned_members.map((member, index) => (
-                                    <tr key={`scanned-${index}`}>
-                                        <td>{index + 1}</td>
-                                        <td>{member.student_id}</td>
-                                        <td>{member.username}</td>
-                                        <td>{member.members_scan_status ? 'O' : 'X'}</td>
+        <>
+            {registered_clubs[0].scan_dates.length > 0 ?(
+                <Wrapper>
+                <ItemBox>
+                    <CheckDay>{currentDate}  출석 확인</CheckDay>
+                    <TableWrapper>
+                        <StyledTable striped bordered hover>
+                            <thead>
+                            <tr>
+                                <th>인원</th>
+                                <th>학번</th>
+                                <th>이름</th>
+                                <th>출석</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {registered_clubs.map((club) => (
+                                <>
+                                    {club.scanned_members.map((member, index) => (
+                                        <tr key={`scanned-${index}`}>
+                                            <td>{index + 1}</td>
+                                            <td>{member.student_id}</td>
+                                            <td>{member.username}</td>
+                                            <td>{member.members_scan_status ? 'O' : 'X'}</td>
+                                        </tr>
+                                    ))}
+                                </>
+                            ))}
+                            {joined_clubs.map((club)=>(
+                                <>
+                                    {club.not_scanned_members.map((member, index) => (
+                                        <tr key={`not-scanned-${index}`}>
+                                            <td>{club.scanned_members.length + index + 1}</td>
+                                            <td>{member.student_id}</td>
+                                            <td>{member.username}</td>
+                                            <td>{member.members_scan_status ? 'O' : 'X'}</td>
+                                        </tr>
+                                    ))}
+                                </>
+                            ))}
+                            </tbody>
+                        </StyledTable>
+                    </TableWrapper>
+                </ItemBox>
+            </Wrapper>
+                ):
+                (
+                    <Wrapper>
+                        <ItemBox>
+                            <NoAttendenceCheck>{currentDate} 진행한 출석 체크가 없습니다.</NoAttendenceCheck>
+                            <TableWrapper>
+                                <StyledTable striped bordered hover>
+                                    <thead>
+                                    <tr>
+                                        <th>인원</th>
+                                        <th>학번</th>
+                                        <th>이름</th>
+                                        <th>출석</th>
                                     </tr>
-                                ))}
-                                {club.not_scanned_members.map((member, index) => (
-                                    <tr key={`not-scanned-${index}`}>
-                                        <td>{club.scanned_members.length + index + 1}</td>
-                                        <td>{member.student_id}</td>
-                                        <td>{member.usename}</td>
-                                        <td>{member.members_scan_status ? 'O' : 'X'}</td>
-                                    </tr>
-                                ))}
-                            </>
-                        ))}
-                        </tbody>
-                    </StyledTable>
-                </TableWrapper>
-            </ItemBox>
-        </Wrapper>
+                                    </thead>
+                                    <tbody>
+                                    {joined_clubs.map((club)=>(
+                                        <>
+                                            {club.not_scanned_members.map((member, index) => (
+                                                <tr key={`not-scanned-${index}`}>
+                                                    <td>{club.scanned_members.length + index + 1}</td>
+                                                    <td>{member.student_id}</td>
+                                                    <td>{member.username}</td>
+                                                    <td>{member.members_scan_status ? 'O' : 'X'}</td>
+                                                </tr>
+                                            ))}
+                                        </>
+                                    ))}
+                                    </tbody>
+                                </StyledTable>
+                            </TableWrapper>
+                        </ItemBox>
+                    </Wrapper>
+                )
+            }
+
+        </>
+
     );
 }
 
@@ -54,6 +110,15 @@ const Wrapper = styled.div`
     margin-bottom: 30px;
     
 `;
+
+const NoAttendenceCheck = styled.div`
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 18px;
+    color: ${({theme}) => theme.colors.lightGray};
+    margin-bottom: 30px;
+`
 
 const ItemBox = styled.div`
 `
