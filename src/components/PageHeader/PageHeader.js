@@ -31,10 +31,10 @@ function PageHeader() {
                     </Link>
                 </LogoBox>
                 <ItemBox>
-                    <StyledLink to={'/main'} selected={currentPath === '/main'}>동아리 구경</StyledLink>
+                    <StyledLink to={'/main'} selected={currentPath === '/main' || currentPath.startsWith("/main/")}>동아리 구경</StyledLink>
                     <StyledLink
                         onClick={handleLoginPopup}
-                        to={'/registration'} selected={currentPath === '/registration'}>동아리 등록</StyledLink>
+                        to={'/registration'} selected={currentPath === '/registration' || currentPath.startsWith("/registration/")}>동아리 등록</StyledLink>
                     <StyledLink
                         onClick={handleLoginPopup}
                         to={'/mypage'} selected={currentPath === '/mypage' || currentPath.startsWith("/mypage/")}>마이페이지</StyledLink>

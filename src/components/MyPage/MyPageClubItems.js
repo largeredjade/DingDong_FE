@@ -2,31 +2,33 @@ import {Link, useNavigate, useParams} from "react-router-dom";
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 import {removeCookie} from "../../auth/cookie";
+import {getCookie} from "../../auth/cookie";
+import axiosInstance from '../../lib/axios';
 
-function MyPageClubItems({data,params}) {
-    const navigate = useNavigate()
-    const [localParams, setLocalParams] = useState(params);
+function MyPageClubItems({data}) {
+    const navigate = useNavigate();
+    const accessToken = getCookie('access');
     console.log(data);
-    useEffect(() => {
-    if (localParams.id) {
-      navigate(`/mypage/joinclub/${localParams.id}`);
-      console.log("params.id:", localParams);
-    }
-  }, [localParams, navigate]);
-
-  const handleParams = (club_id) => {
-    setLocalParams((prevParams) => ({
-      ...prevParams,
-      id: club_id,
-    }));
-  };
-
-
+    console.log(data.registered_clubs[0]);
     const handleLogout = ()=>{
         removeCookie('access')
         navigate('/main')
-
     }
+    
+    async function handleDelete (){
+        try{
+            const response = await axiosInstance.delete(`/clubs/${data.registered_clubs[0].club_id}/delete/`, {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`
+                }
+            });
+            console.log('삭제 response:::',response);
+        }catch (error){
+            console.error("API call error:", error);
+
+        }
+    }
+
     return (
         <>
             {data&&(
@@ -35,21 +37,19 @@ function MyPageClubItems({data,params}) {
                         <RegisterInfo>내가 가입한 동아리</RegisterInfo>
                     </ItemBox>
                     <ClubBtnBox>
-                        {data.registered_clubs.map((i)=>(
-                        <ClubLink  key={i.club_id}  onClick={() => handleParams(i.club_id)}>
-                            {i.name}
-                        </ClubLink>
-                        ))}
                         {data.joined_clubs.map((i)=>(
-                        <ClubLink key={i.club_id}  onClick={() => handleParams(i.club_id)}>
+                        <ClubLink key={i.club_id}  to= {`/mypage/joinclub/${i.club_id}/${i.qr_id}`}>
                             {i.name}
                         </ClubLink>
                         ))}
                     </ClubBtnBox>
                     <LogoutBtnBox>
                         <LogoutBtn onClick={handleLogout}>로그아웃</LogoutBtn>
-                    </LogoutBtnBox>
-                </Wrapper>)}
+                        <p>정말 동아리 폐지를 원하시나요?</p>
+                        <DeleteBtn onClick={handleDelete}>동아리 폐지하기</DeleteBtn>
+                    </LogoutBtnBox>   
+                </Wrapper>
+            )}
         </>
 
     );
@@ -92,8 +92,15 @@ const ClubLink = styled(Link)`
     }
 `;
 const LogoutBtnBox = styled.div`
-    display: flex;
+    display: grid;
+    grid-template-rows: auto auto;
     justify-content: center;
+    p{  
+
+        margin-left: 25px;
+        font-size: 15px;
+        color: ${({theme})=> theme.colors.lightGray};
+    }
 `;
 const LogoutBtn = styled.button`
     margin: 25px ;
@@ -104,3 +111,13 @@ const LogoutBtn = styled.button`
     border-radius: 20px;
     background: ${({theme})=>theme.backgroundColor.mainColorDark};
 `;
+
+const DeleteBtn = styled.button`
+    color: ${({theme})=> theme.colors.lightGray};
+    font-size: 15px;
+    width: 130px;
+    height: 20px;
+    margin-top:10px;
+    margin-left: 60px;
+    font-weight: 600;
+`

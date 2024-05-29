@@ -1,4 +1,4 @@
-import React, { useEffect, useState, use } from 'react';
+import React, { useEffect, useState} from 'react';
 import PageHeader from "../../components/PageHeader/PageHeader";
 import MyPageItems from "../../components/MyPage/MyPageItems";
 import MyPageClubItems from "../../components/MyPage/MyPageClubItems";
@@ -8,14 +8,13 @@ import axiosInstance from "../../lib/axios";
 import manager_user from "../../mockdata/mypage/manager_user.json"
 import {getCookie} from "../../auth/cookie";
 import AttendanceCheck from "../../components/MyPage/AttendanceCheck";
+import Loading from '../../components/LoadingSpinner/Loading';
 
 function MyPage() {
     const params = useParams();
     const user_id = getCookie('user_id');
-    const club_id = getCookie('club_id');
     const access_token = getCookie('access');
     const [data, setUserData] = useState();
-    const [data1, setClubData] = useState();
 
     async function handleSubmit() {
         try {
@@ -30,23 +29,13 @@ function MyPage() {
             console.error("API call error:", error);
         }
     }
-    async function handleSubmit2() {
-        try {
-            const response = await axiosInstance.post(`/mypage/${club_id}/`, {
-                headers: {
-                    Authorization: `Bearer ${access_token}`
-                }
-            });
-            console.log(response);
-            setClubData(response.data);
-        } catch (error) {
-            console.error("API call error:", error);
-        }
-    }
+    
 
-    useEffect(() => {
-        handleSubmit();
-        handleSubmit2();
+    useEffect(() =>  {
+        const getSubmit = async () =>{
+            await handleSubmit();
+        }
+            getSubmit();
     }, []);
 
 
@@ -54,13 +43,20 @@ function MyPage() {
     return (
         <>
             <Wrap>
-                <PageHeader/>
+                {data? <>
+                    <PageHeader/>
                 <ItemBox>
-                    <MyPageItems data={data} data1={data1} params={params} />
+                    <MyPageItems data={data}  params={params} />
                 </ItemBox>
                 <AttendanceCheck/>
                 <MyPageClubItems data={data} params={params}/>
-            </Wrap>
+                
+                </>
+                :
+                <Loading/>
+            }
+              
+           </Wrap>
         </>
 
     );
