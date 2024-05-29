@@ -1,14 +1,13 @@
-import React, { useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import PageHeader from "../../components/PageHeader/PageHeader";
 import MyPageItems from "../../components/MyPage/MyPageItems";
 import MyPageClubItems from "../../components/MyPage/MyPageClubItems";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import axiosInstance from "../../lib/axios";
-import manager_user from "../../mockdata/mypage/manager_user.json"
 import {getCookie} from "../../auth/cookie";
 import AttendanceCheck from "../../components/MyPage/AttendanceCheck";
-import Loading from '../../components/LoadingSpinner/Loading';
+import Loading from "../../components/LoadingSpinner/Loading";
 
 function MyPage() {
     const params = useParams();
@@ -29,34 +28,35 @@ function MyPage() {
             console.error("API call error:", error);
         }
     }
-    
 
-    useEffect(() =>  {
-        const getSubmit = async () =>{
+
+    useEffect(() => {
+        const getSubmit = async () => {
             await handleSubmit();
         }
-            getSubmit();
+        getSubmit();
     }, []);
-
 
 
     return (
         <>
             <Wrap>
-                {data? <>
-                    <PageHeader/>
-                <ItemBox>
-                    <MyPageItems data={data}  params={params} />
-                </ItemBox>
-                <AttendanceCheck/>
-                <MyPageClubItems data={data} params={params}/>
-                
-                </>
-                :
-                <Loading/>
-            }
-              
-           </Wrap>
+                <PageHeader/>
+                {
+                    data ?
+                        <>
+                            <ItemBox>
+                                <MyPageItems data={data} params={params} />
+                            </ItemBox>
+                            {data?.registered_clubs &&(
+                                <AttendanceCheck registered_clubs={data.registered_clubs}/>
+                            )}
+                            <MyPageClubItems data={data} params={params}/>
+                        </>
+                        :
+                        <Loading/>
+                }
+            </Wrap>
         </>
 
     );
