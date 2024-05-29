@@ -9,8 +9,6 @@ function JoinClubPopup({club_id}) {
     const [code,setCode] = useState('')
     const navigation = useNavigate()
     const accessToken = getCookie('access')
-
-
     const handleCode = (e)=>{
         setCode(e.target.value)
     }
@@ -18,6 +16,9 @@ function JoinClubPopup({club_id}) {
 
     async function handleSubmit(e){
         e.preventDefault();
+        if(code===''){
+            alert('가입 코드를 입력해 주세요!')
+        }
         try {
             const response = await axiosInstance.post(`/clubs/${club_id}/club_code/`, {
                 club_code_enter: code,

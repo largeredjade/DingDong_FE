@@ -10,9 +10,9 @@ const QrScanPopup = () => {
     const handleScan = (data) => {
         if (data) {
             setScannedText(data.text);
-            console.log(scannedText);
+            console.log('scannedText::::',scannedText);
             setIsOpen(false)
-        //    유저 이름 백엔드에 넘겨줄것
+
         }
     };
 
