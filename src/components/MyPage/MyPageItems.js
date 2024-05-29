@@ -9,29 +9,32 @@ function MyPageItems({data}) {
     const handleQrPopup = ()=>{
         setIsShowQr(!isShowQr)
     }
-    const location = useLocation();
-    const currentPath = location.pathname;
+
     return (
-        <>  
-            {isShowQr && <QrPopup onChange={handleQrPopup} qr_code={data.registered_clubs[0].qr_id}/>}
-            {data&&(
-                <Wrapper key={data.user_id}>
-                    <ItemBox>
-                        <InfoClub>{data.name}의 동아리 {data.registered_clubs.map((i)=>(
-                            <span>{i.name}</span>
-                        ))}
-                        </InfoClub>
-                    </ItemBox>
-                    <BtnItemBox>
-                        <BtnQR onClick={handleQrPopup}><p>출석 QR<br/>생성하기</p></BtnQR>
-                        <BtnModify>
-                            <Link to={`/mypage/clubedit/${data.user_id}`}>
-                                <p>동아리 정보</p><p>수정하기</p>
-                            </Link>
-                        </BtnModify>
-                    </BtnItemBox>
-                </Wrapper>
-            )}
+        <>
+            {data.registered_clubs.length > 0 ?(
+                <>
+                    {isShowQr && <QrPopup onChange={handleQrPopup} qr_code={data.registered_clubs[0].qr_url}/>}
+                    <Wrapper key={data.user_id}>
+                        <ItemBox>
+                            <InfoClub>{data.name}의 동아리 {data.registered_clubs.map((i)=>(
+                                <span>{i.name}</span>
+                            ))}
+                            </InfoClub>
+                        </ItemBox>
+                        <BtnItemBox>
+                            <BtnQR onClick={handleQrPopup}><p>출석 QR<br/>생성하기</p></BtnQR>
+                            <BtnModify>
+                                {data.registered_clubs.map((i)=>(
+                                    <Link to={`/mypage/clubedit/${i.club_id}`}>
+                                        <p>동아리 정보</p><p>수정하기</p>
+                                    </Link>
+                                ))}
+                            </BtnModify>
+                        </BtnItemBox>
+                    </Wrapper>
+                </>
+            ):null}
         </>
 
     );
