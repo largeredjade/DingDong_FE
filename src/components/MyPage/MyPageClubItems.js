@@ -40,6 +40,11 @@ function MyPageClubItems({data}) {
                         <RegisterInfo>내가 가입한 동아리</RegisterInfo>
                     </ItemBox>
                     <ClubBtnBox>
+                        {data.registered_clubs.map((i)=>(
+                        <ClubLink key={i.club_id}  to= {`/mypage/joinclub/${i.club_id}/${i.qr_id}`}>
+                            {i.name}
+                        </ClubLink>
+                        ))}
                         {data.joined_clubs.map((i)=>(
                         <ClubLink key={i.club_id}  to= {`/mypage/joinclub/${i.club_id}/${i.qr_id}`}>
                             {i.name}
