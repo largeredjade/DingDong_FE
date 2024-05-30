@@ -100,7 +100,7 @@ const BtnItemBox = styled.div`
     color: ${({theme})=> theme.colors.darkGray};
 
 `;
-const BtnCheckQR = styled.div`
+const BtnCheckQR = styled.button`
     p{
         margin: 0;
         font-size: 18px;
