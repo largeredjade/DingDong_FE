@@ -102,6 +102,7 @@ const BtnItemBox = styled.div`
 `;
 const BtnCheckQR = styled.button`
     p{
+        color: ${({theme})=> theme.colors.darkGray};
         margin: 0;
         font-size: 18px;
         line-height: 1.3;

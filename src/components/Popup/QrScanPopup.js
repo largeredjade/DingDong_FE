@@ -9,18 +9,20 @@ const QrScanPopup = ({data, data1}) => {
     const [scannedText, setScannedText] = useState("");
     const [isOpen, setIsOpen] = useState(true);
     const [showQrScan, setShowQrScan] = useState(false);
-    async function handleQrScan() {
+    console.log(data1)
+
+
+    async function handleQrScan(scannedURL) { // 수정된 부분: scannedURL 매개변수 추가
         setShowQrScan(!showQrScan);
         if (!showQrScan) {
             try {
                 const response = await axiosInstance.post(`/mypage/clubs/${data}/scan_qr/${data1}/`, {
-                    ...scannedText
+                    qr_code_enter: scannedURL // 수정된 부분: scannedText 대신 qr_code_enter 사용
                 }, {
                     headers: {
                         Authorization: `Bearer ${accessToken}`
                     }
                 });
-                console.log(response);
                 setScannedText(response.data);
                 console.log('출석 정보 전송 응답:', response);
             } catch (error) {
@@ -29,16 +31,13 @@ const QrScanPopup = ({data, data1}) => {
         }
     }
 
-
     const handleScan = (data) => {
         if (data) {
             const scannedURL = data.text;
             setScannedText(scannedURL);
-            console.log('scannedText::::', scannedURL);
+            console.log('scannedText:', scannedURL);
             setIsOpen(false);
-            handleQrScan();
-
-
+            handleQrScan(scannedURL); // 수정된 부분: handleQrScan에 scannedURL 전달
         }
     };
 
@@ -59,7 +58,6 @@ const QrScanPopup = ({data, data1}) => {
                     <p>{scannedText}</p>
                 </Wrapper>}
         </>
-
     );
 };
 
