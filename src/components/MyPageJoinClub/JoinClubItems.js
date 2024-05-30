@@ -10,17 +10,10 @@ function JoinClubItems() {
     const params = useParams();
     const [userData, setUserData] = useState();
 
-
-    console.log(params);
-    console.log(userData);
-
     const accessToken = getCookie('access');
     const user_id = getCookie('user_id');
-    const club_id = params.club_id;
-    const qr_id =params.qr_id;
-
-    console.log(params.club_id);
-    console.log(params.qr_id);
+    const club_id = parseInt(params.club_id); // club_id를 정수로 변환
+    const qr_id = params.qr_id;
 
     const [showQrScan, setShowQrScan] = useState(false);
 
@@ -31,37 +24,52 @@ function JoinClubItems() {
                     Authorization: `Bearer ${accessToken}`
                 }
             });
-            console.log(response);
             setUserData(response.data);
         } catch (error) {
             console.error("API 호출 오류:", error);
         }
     }
 
-    const handleQrScan = ()=>{
-        setShowQrScan(!showQrScan)
+    const handleQrScan = () => {
+        setShowQrScan(!showQrScan);
     }
 
     useEffect(() => {
         fetchUserData();
     }, []);
 
+    if (!userData) return null;
+
+    const isRegisteredClub = userData.registered_clubs.some((club) => club.club_id === club_id);
+    const isJoinedClub = userData.joined_clubs.some((club) => club.club_id === club_id);
+    console.log(isRegisteredClub);
+    console.log(isJoinedClub);
     return (
-        <>
-            {userData && (
-                <Wrapper key={userData.user_id}>
-                    <ItemBox>
-                        <JoinClubinfo>내가 가입한 동아리 {userData.joined_clubs.map((i) => (
+        <Wrapper key={userData.user_id}>
+            <ItemBox>
+                {isRegisteredClub && (
+                    <JoinClubinfo>
+                        내가 가입한 동아리 {userData.registered_clubs.map((i) => (
                             <span key={i.id}>{i.name}</span>
-                        ))}</JoinClubinfo>
-                    </ItemBox>
-                    <BtnItemBox>
-                        <BtnCheckQR onClick={handleQrScan}><p>출석 QR<br />스캔하기</p></BtnCheckQR>
-                        {showQrScan && <QrScanPopup data={params.club_id} data1={params.qr_id}/>}
-                    </BtnItemBox>
-                </Wrapper>
-            )}
-        </>
+                        ))}
+                    </JoinClubinfo>
+                )}
+                {isJoinedClub && (
+                    <JoinClubinfo>
+                        내가 가입한 동아리 {userData.joined_clubs.map((i) => (
+                            <span key={i.id}>{i.name}</span>
+                        ))}
+                    </JoinClubinfo>
+                )}
+
+            </ItemBox>
+            <BtnItemBox>
+                <BtnCheckQR onClick={handleQrScan}>
+                    <p>출석 QR<br />스캔하기</p>
+                </BtnCheckQR>
+                {showQrScan && <QrScanPopup data={club_id} data1={qr_id} />}
+            </BtnItemBox>
+        </Wrapper>
     );
 }
 
