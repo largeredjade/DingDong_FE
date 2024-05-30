@@ -90,6 +90,7 @@ const NowBtn = styled.button`
   background: #ffffff;
   border: 1px solid #b7b7b7;
   border-radius: 20px;
+  color: ${({theme})=> theme.colors.darkGray};
 `;
 
 const ItemBox = styled.div``;
