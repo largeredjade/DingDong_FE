@@ -54,6 +54,7 @@ const QrScanPopup = ({data, data1}) => {
                         onScan={handleScan}
                         onError={handleError}
                         style={{ width: "100%", height: "100%" }}
+                        facingMode="environment"
                     />
                     <p>{scannedText}</p>
                 </Wrapper>}
