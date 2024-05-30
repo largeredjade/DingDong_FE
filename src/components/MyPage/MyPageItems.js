@@ -24,13 +24,13 @@ function MyPageItems({data}) {
                         </ItemBox>
                         <BtnItemBox>
                             <BtnQR onClick={handleQrPopup}><p>출석 QR<br/>생성하기</p></BtnQR>
+                            {data.registered_clubs.map((i)=>(
+                                <Link to={`/mypage/clubedit/${i.club_id}`}>
                             <BtnModify>
-                                {data.registered_clubs.map((i)=>(
-                                    <Link to={`/mypage/clubedit/${i.club_id}`}>
-                                        <p>동아리 정보</p><p>수정하기</p>
-                                    </Link>
-                                ))}
+                                <p>동아리 정보</p><p>수정하기</p>
                             </BtnModify>
+                                </Link>
+                                ))}
                         </BtnItemBox>
                     </Wrapper>
                 </>
@@ -77,6 +77,8 @@ const BtnQR = styled.button`
         margin: 0;
         font-size: 18px;
         line-height: 1.3;
+        color: ${({theme})=> theme.colors.darkGray};
+
     }
     width: 140px;
     height: 130px;
@@ -86,7 +88,7 @@ const BtnQR = styled.button`
         border: 2px solid ${({theme})=> theme.colors.mainColorDark};
     }
 `;
-const BtnModify = styled.button`
+const BtnModify = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -94,6 +96,8 @@ const BtnModify = styled.button`
     p{
         margin: 0;
         font-size: 18px;
+        color: ${({theme})=> theme.colors.darkGray};
+
     }
     width: 140px;
     height: 130px;
