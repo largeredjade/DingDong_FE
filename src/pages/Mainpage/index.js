@@ -84,7 +84,7 @@ const NowBtnBox = styled.div`
   margin-bottom: 20px;
 `;
 
-const NowBtn = styled.button`
+const NowBtn = styled.div`
   width: 112px;
   height: 32px;
   background: #ffffff;
